@@ -237,6 +237,28 @@
     @media (min-width:1024px) { .featured .thumb { aspect-ratio: 16 / 9; } }
 
     .num-stat { font-family:'Archivo'; font-weight:900; }
+
+    /* ===== cookie banner ===== */
+    .cookie-banner {
+      position: fixed; bottom: 1rem; left: 1rem; right: 1rem; z-index: 85;
+      background: #fff; color: #334155; border: 1px solid #e2e8f0;
+      border-radius: 1.1rem; box-shadow: 0 24px 60px rgba(5,15,38,.35);
+      padding: 1.1rem 1.2rem;
+      transform: translateY(140%);
+      transition: transform .6s cubic-bezier(.22,1,.36,1);
+    }
+    @media (min-width: 640px) {
+      .cookie-banner { right: auto; max-width: 24rem; }
+    }
+    .cookie-banner.mostrar { transform: none; }
+
+    /* ===== páginas legales ===== */
+    .legal { color: #334155; }
+    .legal h2 { font-family:'Archivo'; font-weight: 800; color: #0d2550; }
+    .legal section { background: #fff; }
+
+    /* ===== enlace de texto en footer ===== */
+    .legal-link:hover { color: #f97316; }
   </style>
 </head>
 
@@ -449,6 +471,124 @@
     </div>
   </div>
 
+  <!-- ========================================================
+       VISTA · POLÍTICA DE PRIVACIDAD
+  ======================================================== -->
+  <div id="vista-privacidad" class="view relative z-10 hidden">
+    <section class="legal max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+      <div class="mb-10 text-center">
+        <p class="text-flame-600 text-xs font-bold tracking-[.3em] uppercase mb-2">Legal</p>
+        <h1 class="font-display font-black text-white text-3xl sm:text-5xl tracking-tight">Política de Privacidad</h1>
+        <p class="mt-3 text-blue-200 text-sm">Última actualización: agosto de 2026</p>
+      </div>
+      <section class="rounded-3xl p-7 sm:p-10 shadow-lift border border-slate-100">
+        <p class="text-sm leading-relaxed mb-5">En <strong>Supplies Graphics</strong> (Bogotá, Colombia) tratamos tus datos personales de forma responsable, cumpliendo la <strong>Ley 1581 de 2012</strong> y sus normas reglamentarias (compiladas en el Decreto 1074 de 2015).</p>
+
+        <h2 class="text-lg mb-3 mt-8">1. Responsable del tratamiento</h2>
+        <p class="text-sm leading-relaxed">Supplies Graphics — Bogotá, Colombia. Canal de contacto: WhatsApp +57 310 878 7928.</p>
+
+        <h2 class="text-lg mb-3 mt-8">2. Datos que recolectamos</h2>
+        <p class="text-sm leading-relaxed">Únicamente los datos que nos compartes de forma voluntaria al contactarnos por WhatsApp, correo o catálogo: nombre, datos de contacto y la información de tu pedido o cotización.</p>
+
+        <h2 class="text-lg mb-3 mt-8">3. Finalidades del tratamiento</h2>
+        <ul class="text-sm leading-relaxed list-disc pl-5 space-y-1.5">
+          <li>Atender consultas, cotizaciones y pedidos de productos.</li>
+          <li>Coordinar la entrega, envío y facturación de pedidos.</li>
+          <li>Brindar servicio postventa y soporte técnico.</li>
+          <li>Responder solicitudes de derechos del titular.</li>
+        </ul>
+
+        <h2 class="text-lg mb-3 mt-8">4. No vendemos ni cedemos tus datos</h2>
+        <p class="text-sm leading-relaxed">Tus datos no se venden, alquilan ni comparten con terceros para fines comerciales ajenos a este sitio. Solo se comunicarán cuando la ley lo exija o con tu autorización.</p>
+
+        <h2 class="text-lg mb-3 mt-8">5. Tus derechos</h2>
+        <p class="text-sm leading-relaxed">Como titular puedes ejercer los derechos de <strong>conocer, actualizar, rectificar, suprimir</strong> tus datos, solicitar prueba de la autorización y <strong>revocarla</strong> en cualquier momento. Puedes ejercerlos por WhatsApp al +57 310 878 7928. También puedes presentar reclamos ante la <strong>Superintendencia de Industria y Comercio (SIC)</strong> de Colombia.</p>
+
+        <h2 class="text-lg mb-3 mt-8">6. Cookies y almacenamiento local</h2>
+        <p class="text-sm leading-relaxed">Este sitio guarda una única preferencia en el almacenamiento local de tu navegador para recordar tu decisión sobre el aviso de cookies. <strong>No utilizamos cookies de seguimiento ni de publicidad.</strong> Consulta nuestra <a href="#cookies" data-vista="cookies" class="nav-go font-bold text-brand hover:text-flame-600 underline">Política de Cookies</a>.</p>
+
+        <h2 class="text-lg mb-3 mt-8">7. Seguridad</h2>
+        <p class="text-sm leading-relaxed">Aplicamos medidas técnicas y administrativas razonables para proteger la información que nos confías. Ningún sistema es infalible, pero cuidamos tus datos con estándares de buenas prácticas.</p>
+
+        <h2 class="text-lg mb-3 mt-8">8. Menores de edad</h2>
+        <p class="text-sm leading-relaxed">Este catálogo está dirigido a mayores de edad. No recolectamos a sabiendas información de menores de 18 años.</p>
+
+        <h2 class="text-lg mb-3 mt-8">9. Cambios a esta política</h2>
+        <p class="text-sm leading-relaxed">Cualquier cambio será publicado en esta misma página con su fecha de actualización.</p>
+      </section>
+      <div class="text-center mt-8">
+        <a href="#inicio" data-vista="inicio" class="btn-flame nav-go">← Volver al inicio</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- ========================================================
+       VISTA · TÉRMINOS Y CONDICIONES
+  ======================================================== -->
+  <div id="vista-terminos" class="view relative z-10 hidden">
+    <section class="legal max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+      <div class="mb-10 text-center">
+        <p class="text-flame-600 text-xs font-bold tracking-[.3em] uppercase mb-2">Legal</p>
+        <h1 class="font-display font-black text-white text-3xl sm:text-5xl tracking-tight">Términos y Condiciones</h1>
+        <p class="mt-3 text-blue-200 text-sm">Última actualización: agosto de 2026</p>
+      </div>
+      <section class="rounded-3xl p-7 sm:p-10 shadow-lift border border-slate-100">
+        <h2 class="text-lg mb-3">1. Naturaleza del sitio</h2>
+        <p class="text-sm leading-relaxed mb-5">Este sitio es un catálogo virtual de carácter informativo y comercial de Supplies Graphics. Las imágenes e iconos de productos son referenciales.</p>
+
+        <h2 class="text-lg mb-3">2. Precios y pedidos</h2>
+        <p class="text-sm leading-relaxed mb-5">Los precios se expresan en pesos colombianos (COP) e incluyen IVA. Pueden variar sin previo aviso. La venta queda confirmada cuando Supplies Graphics la confirme por WhatsApp o el medio de contacto acordado.</p>
+
+        <h2 class="text-lg mb-3">3. Disponibilidad y envíos</h2>
+        <p class="text-sm leading-relaxed mb-5">La disponibilidad está sujeta a stock. Los tiempos y costos de envío a nivel nacional se acuerdan al momento de la cotización.</p>
+
+        <h2 class="text-lg mb-3">4. Propiedad intelectual</h2>
+        <p class="text-sm leading-relaxed mb-5">El contenido de este sitio (textos, diseño, logotipo y marca) pertenece a Supplies Graphics. No está permitido copiarlo, reproducirlo ni usarlo sin autorización previa por escrito.</p>
+
+        <h2 class="text-lg mb-3">5. Uso del sitio</h2>
+        <p class="text-sm leading-relaxed mb-5">Te comprometes a usar este sitio de forma lícita y a no introducir programas dañinos ni interferir con su funcionamiento.</p>
+
+        <h2 class="text-lg mb-3">6. Limitación de responsabilidad</h2>
+        <p class="text-sm leading-relaxed mb-5">Hacemos nuestros mejores esfuerzos por mantener la información actualizada y el sitio disponible, pero no garantizamos su disponibilidad ininterrumpida ni la ausencia total de errores.</p>
+
+        <h2 class="text-lg mb-3">7. Legislación aplicable</h2>
+        <p class="text-sm leading-relaxed">Estos términos se rigen por las leyes de la República de Colombia. Cualquier controversia será sometida a los jueces de la ciudad de Bogotá, D.C.</p>
+      </section>
+      <div class="text-center mt-8">
+        <a href="#inicio" data-vista="inicio" class="btn-flame nav-go">← Volver al inicio</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- ========================================================
+       VISTA · POLÍTICA DE COOKIES
+  ======================================================== -->
+  <div id="vista-cookies" class="view relative z-10 hidden">
+    <section class="legal max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+      <div class="mb-10 text-center">
+        <p class="text-flame-600 text-xs font-bold tracking-[.3em] uppercase mb-2">Legal</p>
+        <h1 class="font-display font-black text-white text-3xl sm:text-5xl tracking-tight">Política de Cookies</h1>
+        <p class="mt-3 text-blue-200 text-sm">Última actualización: agosto de 2026</p>
+      </div>
+      <section class="rounded-3xl p-7 sm:p-10 shadow-lift border border-slate-100">
+        <h2 class="text-lg mb-3">Qué son las cookies y el almacenamiento local</h2>
+        <p class="text-sm leading-relaxed mb-5">Las cookies son pequeños archivos que los sitios guardan en tu dispositivo. El <strong>almacenamiento local (localStorage)</strong> tiene un propósito similar: guardar pequeñas preferencias en tu navegador.</p>
+
+        <h2 class="text-lg mb-3">Qué usamos en este sitio</h2>
+        <p class="text-sm leading-relaxed mb-5">Solo usamos una preferencia esencial para recordar tu decisión sobre este aviso de cookies. <strong>No usamos cookies de seguimiento, análisis ni publicidad.</strong></p>
+
+        <h2 class="text-lg mb-3">Cómo administrar esta preferencia</h2>
+        <p class="text-sm leading-relaxed mb-5">Puedes borrar la preferencia desde la configuración de tu navegador (borrar datos de sitio/almacenamiento local) o usando la opción "Rechazar" del aviso. La página seguirá funcionando; solo volverá a mostrarte el aviso.</p>
+
+        <h2 class="text-lg mb-3">Contacto</h2>
+        <p class="text-sm leading-relaxed mb-5">Si tienes dudas sobre esta política, escríbenos por WhatsApp al +57 310 878 7928.</p>
+      </section>
+      <div class="text-center mt-8">
+        <a href="#inicio" data-vista="inicio" class="btn-flame nav-go">← Volver al inicio</a>
+      </div>
+    </section>
+  </div>
+
   <!-- ================= FOOTER ================= -->
   <footer id="contacto" class="border-t border-white/10 bg-navy-950/80 relative z-10 mt-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
@@ -484,12 +624,29 @@
           </div>
         </div>
       </div>
-      <div class="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p class="text-xs text-blue-200/70">© 2026 Supplies Graphics · Bogotá, Colombia</p>
-        <p class="text-xs text-blue-200/50">Hecho con dedicación para tu taller 🔧</p>
+      <div class="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-blue-200/80">
+          <a href="#privacidad" data-vista="privacidad" class="nav-go legal-link hover:text-flame-400 transition-colors">Política de Privacidad</a>
+          <a href="#terminos" data-vista="terminos" class="nav-go legal-link hover:text-flame-400 transition-colors">Términos y Condiciones</a>
+          <a href="#cookies" data-vista="cookies" class="nav-go legal-link hover:text-flame-400 transition-colors">Política de Cookies</a>
+        </div>
+        <p class="text-xs text-blue-200/70 text-center">© 2026 Supplies Graphics · Bogotá, Colombia</p>
       </div>
     </div>
   </footer>
+
+  <!-- ================= AVISO DE COOKIES ================= -->
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite">
+    <p class="text-sm leading-snug">
+      Usamos una preferencia de navegación para recordar tu decisión sobre las cookies.
+      No usamos cookies de seguimiento ni publicidad.
+      <a href="#cookies" data-vista="cookies" class="nav-go font-bold text-brand underline hover:text-flame-600">Conoce más</a>
+    </p>
+    <div class="mt-3.5 flex items-center gap-2.5">
+      <button id="cookie-aceptar" class="btn-flame !py-2 !px-5 !text-xs flex-1">Aceptar</button>
+      <button id="cookie-rechazar" class="!py-2 !px-5 !text-xs chip">Solo esencial</button>
+    </div>
+  </div>
 
   <!-- Botón flotante WhatsApp -->
   <a id="wa-float" href="#" target="_blank" class="wa-float" aria-label="Pedir por WhatsApp">
@@ -660,15 +817,15 @@
     const menuMovil = document.getElementById("menu-movil");
 
     function irAInicio() {
+      document.querySelectorAll(".view").forEach((v) => v.classList.add("hidden"));
       vistaInicio.classList.remove("hidden");
-      vistaCatalogo.classList.add("hidden");
       navLinks.forEach((l) => l.classList.remove("active"));
       document.querySelectorAll('.nav-link[data-vista="inicio"]').forEach((l) => l.classList.add("active"));
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     function irACatalogo(categoria) {
-      vistaInicio.classList.add("hidden");
+      document.querySelectorAll(".view").forEach((v) => v.classList.add("hidden"));
       vistaCatalogo.classList.remove("hidden");
       navLinks.forEach((l) => l.classList.remove("active"));
       document.querySelectorAll('.nav-link[data-vista="catalogo"]').forEach((l) => l.classList.add("active"));
@@ -688,6 +845,13 @@
       setTimeout(() => document.getElementById("contacto").scrollIntoView({ behavior: "smooth" }), 350);
     }
 
+    function irAPagina(id) {
+      document.querySelectorAll(".view").forEach((v) => v.classList.add("hidden"));
+      document.getElementById(id).classList.remove("hidden");
+      navLinks.forEach((l) => l.classList.remove("active"));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
     document.querySelectorAll(".nav-go").forEach((el) => {
       el.addEventListener("click", (e) => {
         e.preventDefault();
@@ -696,6 +860,9 @@
         const cat = el.dataset.cat;
         if (vista === "catalogo") irACatalogo(cat);
         else if (vista === "inicio") irAInicio();
+        else if (vista === "privacidad") irAPagina("vista-privacidad");
+        else if (vista === "terminos") irAPagina("vista-terminos");
+        else if (vista === "cookies") irAPagina("vista-cookies");
       });
     });
 
@@ -766,6 +933,32 @@
     renderizar();
     renderDestacados();
     observarReveal();
+
+    // ============================================================
+    // 11) AVISO DE COOKIES
+    // ============================================================
+    const cookieBanner = document.getElementById("cookie-banner");
+    const cookieDecision = localStorage.getItem("sg_cookies");
+
+    function cerrarBanner() {
+      cookieBanner.classList.remove("mostrar");
+    }
+
+    if (cookieDecision) {
+      cerrarBanner();
+    } else {
+      setTimeout(() => cookieBanner.classList.add("mostrar"), 1200);
+    }
+
+    document.getElementById("cookie-aceptar").addEventListener("click", () => {
+      localStorage.setItem("sg_cookies", "aceptadas");
+      cerrarBanner();
+    });
+
+    document.getElementById("cookie-rechazar").addEventListener("click", () => {
+      localStorage.setItem("sg_cookies", "esenciales");
+      cerrarBanner();
+    });
   </script>
 </body>
 </html>
