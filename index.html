@@ -4,347 +4,253 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Supplies Graphics — Catálogo Virtual</title>
-  <meta name="description" content="Catálogo virtual interactivo de herramientas profesionales para polarizados, detailing y PPF." />
+  <meta name="description" content="Catálogo virtual de herramientas profesionales para polarizados, detailing y PPF. Calidad industrial, precios en COP." />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    :root {
-      --accent-green: #00e676;
-      --accent-orange: #ff7a00;
-      --carbon: #0a0a0c;
-      --panel: #131317;
-    }
-
-    html { scroll-behavior: smooth; }
-    body { background: var(--carbon); }
-
-    ::selection { background: var(--accent-green); color: #000; }
-
-    .font-display { font-family: 'Arial Black', 'Helvetica Neue', sans-serif; }
-
-    /* ---------- Tailwind custom theme ---------- */
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            carbon: '#0a0a0c',
-            panel: '#131317',
-            panel2: '#1a1a1f',
-            neon: '#00e676',
-            blaze: '#ff7a00',
+            brand: '#2563eb',
+            navy: '#1e3a8a',
+            skyline: '#eff6ff',
+            whatsapp: '#25D366',
           },
           fontFamily: {
-            display: ['"Arial Black"', 'Arial', 'sans-serif'],
+            display: ['"Segoe UI"', 'Arial', 'sans-serif'],
           },
           boxShadow: {
-            'neon': '0 0 18px rgba(0,230,118,.35)',
-            'blaze': '0 0 18px rgba(255,122,0,.35)',
-            'card': '0 18px 40px rgba(0,0,0,.55)',
+            soft: '0 10px 30px rgba(30, 58, 138, .08)',
+            lift: '0 16px 40px rgba(30, 58, 138, .14)',
           },
         }
       }
     }
 
-    /* ---------- Background FX ---------- */
-    .bg-grain {
-      background-image:
-        radial-gradient(circle at 15% 20%, rgba(0,230,118,.08), transparent 45%),
-        radial-gradient(circle at 85% 10%, rgba(255,122,0,.07), transparent 40%),
-        radial-gradient(circle at 50% 90%, rgba(0,230,118,.05), transparent 50%);
-    }
+    body { font-family: 'Segoe UI', Arial, sans-serif; }
 
-    .grid-lines {
-      background-image:
-        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-      background-size: 42px 42px;
-    }
+    ::selection { background: #bfdbfe; color: #1e3a8a; }
 
-    /* ---------- Product card ---------- */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
+    ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
+
+    /* ---------- Cards ---------- */
     .card {
-      background: var(--panel);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 1rem;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 1.1rem;
       overflow: hidden;
-      transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s, border-color .35s;
-      animation: rise .6s cubic-bezier(.22,1,.36,1) backwards;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      animation: rise .5s ease both;
     }
     .card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(0,230,118,.55);
-      box-shadow: 0 24px 48px rgba(0,0,0,.6), 0 0 24px rgba(0,230,118,.15);
+      transform: translateY(-5px);
+      border-color: #bfdbfe;
+      box-shadow: 0 16px 40px rgba(30, 58, 138, .14);
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     .thumb {
       position: relative;
       aspect-ratio: 16 / 11;
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 60%, #e0f2fe 100%);
+      display: grid;
+      place-items: center;
       overflow: hidden;
-      background:
-        linear-gradient(135deg, #1c1c22 0%, #0e0e12 60%, #161a15 100%);
-      border-bottom: 1px solid rgba(255,255,255,.06);
     }
-    .thumb::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(135deg, rgba(0,230,118,.22), transparent 55%),
-        repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 1px, transparent 1px 10px);
+    .thumb .tool {
+      width: 40%;
+      color: #93c5fd;
+      filter: drop-shadow(0 6px 10px rgba(37, 99, 235, .25));
     }
-    .thumb .glow-ring {
+    .thumb .ring {
       position: absolute;
-      inset: 10%;
-      border: 1px dashed rgba(255,255,255,.14);
+      inset: 8%;
+      border: 1.5px dashed #bfdbfe;
       border-radius: 1rem;
-      display: grid;
-      place-items: center;
-    }
-    .thumb .glow-ring::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 1rem;
-      box-shadow: inset 0 0 34px rgba(0,230,118,.28);
-    }
-    .thumb .wheel {
-      position: relative;
-      width: 42%;
-      aspect-ratio: 1;
-      border-radius: 9999px;
-      border: 3px solid rgba(0,230,118,.85);
-      box-shadow: 0 0 26px rgba(0,230,118,.55), inset 0 0 18px rgba(0,230,118,.35);
-      display: grid;
-      place-items: center;
-    }
-    .thumb .wheel span {
-      width: 26%;
-      aspect-ratio: 1;
-      border-radius: 9999px;
-      background: radial-gradient(circle, #333 0%, #0a0a0c 70%);
-      border: 1px solid rgba(255,255,255,.2);
     }
 
-    /* ---------- Filter chips ---------- */
     .chip {
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.03);
-      color: #c9c9d1;
-      padding: .55rem 1.1rem;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      color: #475569;
+      padding: .5rem 1rem;
       border-radius: 9999px;
-      font-size: .8rem;
+      font-size: .78rem;
       font-weight: 700;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      transition: all .25s;
+      letter-spacing: .03em;
+      transition: all .2s;
       white-space: nowrap;
       cursor: pointer;
     }
-    .chip:hover { border-color: rgba(0,230,118,.6); color: #fff; }
+    .chip:hover { border-color: #93c5fd; color: #2563eb; background: #eff6ff; }
     .chip.active {
-      background: var(--accent-green);
-      border-color: var(--accent-green);
-      color: #000;
-      box-shadow: 0 0 20px rgba(0,230,118,.45);
+      background: #2563eb;
+      border-color: #2563eb;
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(37, 99, 235, .3);
     }
 
-    /* ---------- WhatsApp button ---------- */
     .btn-wa {
-      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: .5rem;
       width: 100%;
-      padding: .8rem 1rem;
+      padding: .78rem 1rem;
       border-radius: .8rem;
-      font-weight: 800;
+      font-weight: 700;
       font-size: .9rem;
       color: #fff;
-      background: linear-gradient(135deg, #25d366, #128c7e);
-      transition: transform .2s, box-shadow .25s, filter .25s;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      transition: transform .15s, box-shadow .2s, filter .2s;
     }
-    .btn-wa:hover { filter: brightness(1.12); box-shadow: 0 10px 26px rgba(37,211,102,.4); }
+    .btn-wa:hover { filter: brightness(1.08); box-shadow: 0 10px 24px rgba(37, 211, 102, .35); }
     .btn-wa:active { transform: scale(.97); }
-
-    .btn-wa.alt {
-      background: linear-gradient(135deg, var(--accent-orange), #e04800);
-    }
-    .btn-wa.alt:hover { box-shadow: 0 10px 26px rgba(255,122,0,.4); }
-
-    /* ---------- Animations ---------- */
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(28px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .card:nth-child(2) { animation-delay: .06s; }
-    .card:nth-child(3) { animation-delay: .12s; }
-    .card:nth-child(4) { animation-delay: .18s; }
-    .card:nth-child(5) { animation-delay: .24s; }
-    .card:nth-child(6) { animation-delay: .30s; }
-
-    @keyframes scan {
-      0%   { top: -15%; }
-      100% { top: 115%; }
-    }
-    .scanline {
-      position: absolute;
-      left: 0; right: 0; height: 34px;
-      background: linear-gradient(180deg, transparent, rgba(0,230,118,.18), transparent);
-      animation: scan 5s linear infinite;
-      pointer-events: none;
-    }
-
-    .price {
-      background: linear-gradient(135deg, var(--accent-green), #0dc96b);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .price.blaze {
-      background: linear-gradient(135deg, var(--accent-orange), #ffb24d);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
 
     .badge-cat {
       position: absolute;
-      top: .8rem;
-      left: .8rem;
+      top: .7rem;
+      left: .7rem;
       z-index: 5;
-      font-size: .65rem;
-      font-weight: 800;
-      letter-spacing: .12em;
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .08em;
       text-transform: uppercase;
-      padding: .35rem .7rem;
+      padding: .3rem .65rem;
       border-radius: 9999px;
-      background: rgba(0,0,0,.6);
-      backdrop-filter: blur(6px);
-      color: var(--accent-green);
-      border: 1px solid rgba(0,230,118,.4);
+      background: rgba(255,255,255,.92);
+      color: #2563eb;
+      border: 1px solid #bfdbfe;
     }
 
-    .hero-title {
-      background: linear-gradient(100deg, #fff 20%, var(--accent-green) 50%, var(--accent-orange) 80%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .hero {
+      background:
+        radial-gradient(ellipse at 20% 0%, rgba(191,219,254,.6), transparent 55%),
+        radial-gradient(ellipse at 80% 100%, rgba(219,234,254,.7), transparent 55%),
+        #f8fafc;
     }
-
-    /* ---------- Scrollbar ---------- */
-    ::-webkit-scrollbar { width: 10px; }
-    ::-webkit-scrollbar-track { background: #0a0a0c; }
-    ::-webkit-scrollbar-thumb { background: #2a2a30; border-radius: 8px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--accent-green); }
-
-    @keyframes pulse-ring {
-      0% { box-shadow: 0 0 0 0 rgba(0,230,118,.5); }
-      70% { box-shadow: 0 0 0 12px rgba(0,230,118,0); }
-      100% { box-shadow: 0 0 0 0 rgba(0,230,118,0); }
-    }
-    .pulse-dot { animation: pulse-ring 1.8s infinite; }
   </style>
 </head>
 
-<body class="text-gray-200 antialiased bg-carbon min-h-screen font-sans">
-
-  <div class="fixed inset-0 bg-grain pointer-events-none"></div>
-  <div class="fixed inset-0 grid-lines pointer-events-none opacity-60"></div>
+<body class="bg-[#f6f8fc] text-slate-700 antialiased min-h-screen">
 
   <!-- ================= HEADER ================= -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-carbon/80 border-b border-white/10">
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neon to-blaze grid place-items-center shadow-neon">
-          <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="3.2"></circle>
-            <path stroke-linecap="round" d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"></path>
-          </svg>
-        </div>
+        <img src="logo.jpg" alt="Logo Supplies Graphics"
+             class="w-11 h-11 rounded-full object-cover border border-slate-200 shadow-soft" />
         <div class="leading-tight">
-          <p class="font-display text-white text-base sm:text-lg tracking-widest">SUPPLIES <span class="text-neon">GRAPHICS</span></p>
-          <p class="text-[10px] sm:text-xs text-gray-400 tracking-[.3em] uppercase">Polarizado · Detailing · PPF</p>
+          <p class="font-display font-extrabold text-navy text-base sm:text-lg tracking-wide">SUPPLIES <span class="text-brand">GRAPHICS</span></p>
+          <p class="text-[10px] sm:text-xs text-slate-400 tracking-[.25em] uppercase">Polarizado · Detailing · PPF</p>
         </div>
       </div>
-      <a href="#catalogo" class="chip !py-2 !px-4 text-neon border-neon/50 hidden sm:inline-flex">Ver Catálogo</a>
+      <div class="hidden sm:flex items-center gap-2">
+        <a href="#catalogo" class="text-sm font-semibold text-slate-600 hover:text-brand px-3 py-2">Catálogo</a>
+        <a href="#contacto" class="text-sm font-semibold text-slate-600 hover:text-brand px-3 py-2">Contacto</a>
+        <a href="#catalogo" class="chip !bg-navy !border-navy !text-white hover:!bg-brand">Ver catálogo</a>
+      </div>
+      <a href="#catalogo" class="sm:hidden chip">Ver catálogo</a>
     </div>
   </header>
 
   <!-- ================= HERO ================= -->
-  <section class="relative overflow-hidden pt-14 pb-10 sm:pt-20 sm:pb-14">
-    <div class="scanline"></div>
+  <section class="hero relative overflow-hidden pt-14 pb-12 sm:pt-20 sm:pb-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center relative z-10">
-      <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-bold tracking-[.25em] uppercase text-neon border border-neon/40 rounded-full px-4 py-1.5 mb-5">
-        <span class="w-2 h-2 rounded-full bg-neon pulse-dot"></span>
-        Revista Virtual 2026 · Bogotá, Colombia
+      <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-bold tracking-[.2em] uppercase text-brand bg-blue-50 border border-blue-100 rounded-full px-4 py-1.5 mb-6">
+        <span class="w-2 h-2 rounded-full bg-whatsapp"></span>
+        Catálogo Virtual · Bogotá, Colombia
       </span>
-      <h1 class="hero-title font-display text-4xl sm:text-6xl lg:text-7xl leading-[1.05] tracking-tight uppercase">
-        Herramientas<br />de Alto Rendimiento
+      <h1 class="font-display font-extrabold text-navy text-4xl sm:text-5xl lg:text-6xl leading-[1.08] tracking-tight">
+        Herramientas profesionales<br class="hidden sm:block" />
+        <span class="text-brand">para tu taller</span>
       </h1>
-      <p class="mt-5 max-w-2xl mx-auto text-gray-400 text-sm sm:text-base leading-relaxed">
-        Equipamiento profesional para <strong class="text-white">polarizados</strong>, <strong class="text-white">detailing</strong> y <strong class="text-white">PPF</strong>.
-        Calidad industrial, precios en COP y entrega directa.
+      <p class="mt-5 max-w-2xl mx-auto text-slate-500 text-sm sm:text-base leading-relaxed">
+        Equipamiento de calidad industrial para <strong class="text-navy">polarizados</strong>,
+        <strong class="text-navy">detailing</strong> y <strong class="text-navy">PPF</strong>.
+        Precios en pesos colombianos y pedidos directos por WhatsApp.
       </p>
-      <div class="mt-8 flex flex-wrap items-center justify-center gap-3 text-xs font-bold uppercase tracking-wider">
-        <span class="px-4 py-2 rounded-lg bg-panel border border-white/10">+ 50 Referencias</span>
-        <span class="px-4 py-2 rounded-lg bg-panel border border-white/10">Envío a toda Colombia</span>
-        <span class="px-4 py-2 rounded-lg bg-panel border border-white/10">Pedidos por WhatsApp</span>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3 text-xs font-semibold uppercase tracking-wider">
+        <span class="px-4 py-2 rounded-lg bg-white border border-slate-200 shadow-soft">+ 30 Referencias</span>
+        <span class="px-4 py-2 rounded-lg bg-white border border-slate-200 shadow-soft">Envío a toda Colombia</span>
+        <span class="px-4 py-2 rounded-lg bg-white border border-slate-200 shadow-soft">Pedidos por WhatsApp</span>
       </div>
     </div>
   </section>
 
   <!-- ================= CATALOG ================= -->
-  <main id="catalogo" class="max-w-7xl mx-auto px-4 sm:px-6 pb-24 relative z-10">
+  <main id="catalogo" class="max-w-7xl mx-auto px-4 sm:px-6 pb-20">
 
-    <div class="flex items-end justify-between gap-4 mb-6">
+    <div class="flex flex-wrap items-end justify-between gap-3 mb-5">
       <div>
-        <p class="text-neon text-xs font-bold tracking-[.3em] uppercase mb-1">Catálogo</p>
-        <h2 class="font-display text-2xl sm:text-3xl text-white uppercase tracking-tight">Nuestro Equipo</h2>
+        <p class="text-brand text-xs font-bold tracking-[.25em] uppercase mb-1">Catálogo</p>
+        <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-navy tracking-tight">Nuestros productos</h2>
       </div>
-      <p id="result-count" class="text-xs text-gray-500 uppercase tracking-wider whitespace-nowrap"></p>
+      <p id="result-count" class="text-xs text-slate-400 font-semibold uppercase tracking-wider"></p>
     </div>
 
-    <!-- Filters -->
-    <div id="filtros" class="flex gap-2.5 overflow-x-auto pb-3 -mx-4 px-4 sm:mx-0 sm:px-0 sm:overflow-visible sm:flex-wrap sticky top-[64px] sm:top-[72px] z-40 bg-carbon/85 backdrop-blur-md py-2 mb-6 -mt-2">
-      <button class="chip active" data-filter="todos">Todos</button>
-      <button class="chip" data-filter="Limpieza">Limpieza</button>
-      <button class="chip" data-filter="Corte">Corte</button>
-      <button class="chip" data-filter="Herramientas Polarizado">Herramientas Polarizado</button>
-      <button class="chip" data-filter="Kits">Kits</button>
+    <!-- Filtros + búsqueda -->
+    <div class="sticky top-[64px] sm:top-[72px] z-40 -mx-4 px-4 sm:mx-0 sm:px-0 bg-[#f6f8fc]/95 backdrop-blur-md py-3 mb-6">
+      <div class="flex items-center gap-3">
+        <div id="filtros" class="flex gap-2 overflow-x-auto pb-1 flex-1">
+          <button class="chip active" data-filter="todos">Todos</button>
+          <button class="chip" data-filter="Limpieza">Limpieza</button>
+          <button class="chip" data-filter="Corte">Corte</button>
+          <button class="chip" data-filter="Herramientas Polarizado">Herramientas Polarizado</button>
+          <button class="chip" data-filter="Kits">Kits</button>
+        </div>
+        <div class="hidden sm:block relative">
+          <input id="buscador" type="text" placeholder="Buscar producto o modelo..."
+                 class="w-56 pl-9 pr-3 py-2 text-sm rounded-full border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400" />
+          <svg class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7"></circle><path stroke-linecap="round" d="m21 21-4.3-4.3"></path>
+          </svg>
+        </div>
+      </div>
     </div>
 
-    <!-- Products Grid -->
+    <!-- Grid de productos -->
     <div id="productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"></div>
 
     <!-- CTA -->
-    <section class="mt-16 rounded-3xl overflow-hidden border border-neon/30 bg-gradient-to-br from-panel via-panel2 to-carbon relative">
-      <div class="scanline"></div>
+    <section id="contacto" class="mt-16 rounded-3xl overflow-hidden bg-navy relative">
+      <div class="absolute inset-0 opacity-10"
+           style="background-image:radial-gradient(circle at 20% 30%, #fff 1.5px, transparent 1.5px); background-size:26px 26px;"></div>
       <div class="p-8 sm:p-12 text-center relative z-10">
-        <h3 class="font-display text-2xl sm:text-4xl text-white uppercase tracking-tight">
+        <h3 class="font-display font-extrabold text-white text-2xl sm:text-3xl tracking-tight">
           ¿No encuentras lo que buscas?
         </h3>
-        <p class="mt-3 text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
-          Manejo de línea completa en polarizado, detailing y PPF. Escríbenos y consigue tu herramienta en menos de 24 horas.
+        <p class="mt-3 text-blue-100 max-w-xl mx-auto text-sm sm:text-base">
+          Manejo de línea completa en polarizado, detailing y PPF. Escríbenos y consigue tu herramienta.
         </p>
         <a id="btn-wa-general" href="#" target="_blank"
-           class="mt-7 inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-neon text-black font-extrabold text-sm sm:text-base uppercase tracking-wider hover:brightness-110 active:scale-95 transition shadow-neon">
+           class="mt-7 inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-whatsapp text-white font-bold text-sm uppercase tracking-wider hover:brightness-110 active:scale-95 transition shadow-lg">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
           </svg>
-          Escríbenos ahora
+          Pedir por WhatsApp
         </a>
       </div>
     </section>
-
   </main>
 
   <!-- ================= FOOTER ================= -->
-  <footer class="border-t border-white/10 bg-panel/60 relative z-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
-      <div class="text-center sm:text-left">
-        <p class="font-display text-white tracking-widest">SUPPLIES <span class="text-neon">GRAPHICS</span></p>
-        <p class="text-xs text-gray-500 mt-1">Herramientas profesionales · Polarizado · Detailing · PPF</p>
+  <footer class="border-t border-slate-200 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3 text-center sm:text-left">
+        <img src="logo.jpg" alt="Supplies Graphics" class="w-9 h-9 rounded-full object-cover border border-slate-200" />
+        <div>
+          <p class="font-display font-extrabold text-navy tracking-wide">SUPPLIES <span class="text-brand">GRAPHICS</span></p>
+          <p class="text-xs text-slate-400">Herramientas profesionales · Polarizado · Detailing · PPF</p>
+        </div>
       </div>
-      <p class="text-xs text-gray-500 text-center">© 2026 Supplies Graphics · Bogotá, Colombia · Hecho con <span class="text-neon">▮</span></p>
+      <p class="text-xs text-slate-400 text-center">© 2026 Supplies Graphics · Bogotá, Colombia</p>
     </div>
   </footer>
 
@@ -352,39 +258,40 @@
   <script>
     // ============================================================
     // 1) DATOS DEL CATÁLOGO  (arreglo JSON sencillo)
-    //    ⚠️ Reemplaza "57XXXXXXXXX" por tu número real de WhatsApp
-    //    (código de país 57 = Colombia + número, sin + ni espacios)
+    //    ⚠️ Cambia "573108787928" si deseas otro número de WhatsApp
+    //    (código de país 57 + número, sin + ni espacios)
     // ============================================================
     const WHATSAPP_NUMBER = "573108787928";
 
     const productos = [
-      {
-        id: 1,
-        titulo: "RASPADOR DE VIDRIO MANGO LARGO",
-        descripcion: "Herramienta de largo alcance para remoción de adhesivos.",
-        modelo: "JL358",
-        precio: 17500,
-        categoria: "Limpieza",
-        destacado: false
-      },
-      {
-        id: 2,
-        titulo: "RASPADOR EXTRA DURO MANGO ALUMINIO 3M",
-        descripcion: "Implemento industrial con mango largo para máxima palanca.",
-        modelo: "JL376",
-        precio: 42000,
-        categoria: "Limpieza",
-        destacado: true
-      },
-      {
-        id: 3,
-        titulo: "KIT ESPATULAS Y PALANCAS WRAP X 6 UNID",
-        descripcion: "Set profesional para espacios reducidos sin dañar la pintura.",
-        modelo: "JL509",
-        precio: 63000,
-        categoria: "Kits",
-        destacado: false
-      }
+      { id: 1,  titulo: "RASPADOR DE VIDRIO MANGO LARGO",                       descripcion: "Herramienta de largo alcance para remoción de adhesivos, residuos y material sobrante en superficies de vidrio.", modelo: "JL358", precio: 17500, categoria: "Limpieza", destacado: false },
+      { id: 2,  titulo: "RASPADOR ALUMINIO MANGO LARGO (CORTE)",                descripcion: "Raspador de aluminio con mango largo (BLUEMAX 25,5 x 13 cm) para corte y remoción de material adhesivo.", modelo: "JL350", precio: 42000, categoria: "Limpieza", destacado: false },
+      { id: 3,  titulo: "RASPADOR RANURADO AZUL",                               descripcion: "Raspador ergonómico ranurado azul, ideal para trabajo de limpieza y corte de precisión.", modelo: "JL353", precio: 24500, categoria: "Limpieza", destacado: false },
+      { id: 4,  titulo: "RASPADOR RANURADO ROJO",                               descripcion: "Raspador ergonómico ranurado rojo, ideal para trabajo de limpieza y corte de precisión.", modelo: "JL353", precio: 24500, categoria: "Limpieza", destacado: false },
+      { id: 5,  titulo: "RASPADOR DE SILICONA MANGO PLÁSTICO",                  descripcion: "Espátula de silicona de alta flexibilidad ideal para el moldeado de películas y succión de agua sin dañar el material.", modelo: "JL511", precio: 14000, categoria: "Herramientas Polarizado", destacado: false },
+      { id: 6,  titulo: "LIMPIADOR DE SILICONA SUAVE",                          descripcion: "Escurridor de alto rendimiento para eliminar agua en superficies planas. Su hoja de silicona deja libre de vetas y rayaduras.", modelo: "JL373", precio: 14000, categoria: "Limpieza", destacado: false },
+      { id: 7,  titulo: "RASPADOR MULTIUSOS ROJO",                              descripcion: "Raspador multiusos con mango ergonómico, ideal para preparar y limpiar áreas antes de la instalación de películas.", modelo: "JL508", precio: 17500, categoria: "Herramientas Polarizado", destacado: false },
+      { id: 8,  titulo: "RASPADOR EXTRA DURO MANGO ALUMINIO 3M",                descripcion: "Implemento industrial con mango largo de aluminio para máxima palanca y remoción de material.", modelo: "JL376", precio: 42000, categoria: "Limpieza", destacado: true },
+      { id: 9,  titulo: "ESCURRIDOR MANGO DE GOMA BLUEMAX",                     descripcion: "Escurridor preferido por instaladores para la extracción total de agua en películas de seguridad. Hoja BLUEMAX de 18,5 cm.", modelo: "JL373", precio: 35000, categoria: "Limpieza", destacado: false },
+      { id: 10, titulo: "RASPADOR SUAVE COLOR ROJO",                            descripcion: "Raspador suave de color rojo, diseñado y ajustado para el acabado final de limpieza en instalaciones.", modelo: "JL329", precio: 17500, categoria: "Limpieza", destacado: false },
+      { id: 11, titulo: "RASPADOR MULTITÉCNICO",                                descripcion: "Herramienta técnica diseñada para trabajar las superficies de las películas durante la instalación.", modelo: "JL442", precio: 21000, categoria: "Herramientas Polarizado", destacado: false },
+      { id: 12, titulo: "RASPADOR DE UN SOLO PROPÓSITO",                        descripcion: "Herramienta especializada de precisión para una tarea específica, con resultados óptimos y uniformes en aplicaciones repetitivas.", modelo: "JL443", precio: 28000, categoria: "Herramientas Polarizado", destacado: false },
+      { id: 13, titulo: "ESPÁTULA EN ESCUADRA EN TEFLÓN",                       descripcion: "Herramienta de baja fricción ideal para el moldeado de películas en esquinas y bordes. Disponible en colores.", modelo: "JL328", precio: 14000, categoria: "Herramientas Polarizado", destacado: false },
+      { id: 14, titulo: "ESPÁTULA EN TEFLÓN MULTIUSO GRANDE",                   descripcion: "Versión ampliada para mayor control en el moldeado de vidrios de gran tamaño.", modelo: "JL306", precio: 14700, categoria: "Herramientas Polarizado", destacado: false },
+      { id: 15, titulo: "RASPADOR BLANCO TRAPEZOIDAL",                          descripcion: "Espátula de dureza media para la aplicación general de vinilos y remoción de agua.", modelo: "JL304", precio: 14000, categoria: "Herramientas Polarizado", destacado: false },
+      { id: 16, titulo: "ESPÁTULA CON IMÁN 3M",                                 descripcion: "Herramienta con imán integrado que facilita el posicionamiento de materiales durante la instalación.", modelo: "JL150", precio: 5600, categoria: "Herramientas Polarizado", destacado: false },
+      { id: 17, titulo: "CUCHILLA DE MANO CORTA PARA PELÍCULA",                 descripcion: "Cortador de seguridad diseñado para realizar cortes precisos sin exponer la hoja.", modelo: "JL142", precio: 10500, categoria: "Corte", destacado: false },
+      { id: 18, titulo: "RASPADOR MULTIÁNGULO",                                 descripcion: "Espátula flexible de múltiples ángulos que se adapta a las curvaturas de la superficie.", modelo: "JL151", precio: 4900, categoria: "Herramientas Polarizado", destacado: false },
+      { id: 19, titulo: "REPUESTOS PARA RASPADOR DE SILICONA ROJO",             descripcion: "Hojas de reemplazo de alta resistencia para mantener la superficie libre de daños.", modelo: "JL423", precio: 7000, categoria: "Limpieza", destacado: false },
+      { id: 20, titulo: "REPUESTOS PARA RASPADOR DE SILICONA VERDE",            descripcion: "Hojas de reemplazo de alta resistencia para mantener la superficie libre de daños.", modelo: "JL423", precio: 7000, categoria: "Limpieza", destacado: false },
+      { id: 21, titulo: "REPUESTO CUCHILLA DE GOMA NEGRA",                      descripcion: "Repuesto de cuchilla en goma para escurridor, ideal para el trabajo limpio sobre películas y vinilos.", modelo: "JL534", precio: 17500, categoria: "Limpieza", destacado: false },
+      { id: 22, titulo: "KIT DE HERRAMIENTAS ESPECIAL PARA PELÍCULAS",          descripcion: "Set integral con los elementos esenciales para medir, cortar y ajustar películas protectoras. Instalación profesional de principio a fin.", modelo: "JL530", precio: 17500, categoria: "Kits", destacado: false },
+      { id: 23, titulo: "BISTURÍ UTILITARIO LANZA 9MM",                         descripcion: "Cuchilla de seguridad para corte de precisión y trabajo manual de materiales.", modelo: "JL532", precio: 10500, categoria: "Corte", destacado: false },
+      { id: 24, titulo: "BISTURÍ TAJIMA EC 303",                                descripcion: "Instrumento de corte de precisión japonesa con cuerpo ergonómico. Ideal para cortes detallados en vinilos y películas de seguridad.", modelo: "JL537", precio: 10500, categoria: "Corte", destacado: false },
+      { id: 25, titulo: "BISTURÍ TAJIMA LC 320",                                descripcion: "Instrumento de corte de precisión japonesa con cuerpo ergonómico. Ideal para cortes detallados en vinilos y películas de seguridad.", modelo: "JL539", precio: 12600, categoria: "Corte", destacado: false },
+      { id: 26, titulo: "HERRAMIENTA MULTIUSOS DE METAL (PPF)",                 descripcion: "Herramienta multiusos de metal para el estirado y presión de la película de protección de pintura (PPF).", modelo: "JL510", precio: 42000, categoria: "Herramientas Polarizado", destacado: false },
+      { id: 27, titulo: "KIT ESPÁTULAS Y PALANCAS WRAP X 6",                    descripcion: "Set profesional para espacios reducidos sin dañar la pintura, ideal para la instalación de vinilos y PPF.", modelo: "JL509", precio: 63000, categoria: "Kits", destacado: true },
+      { id: 28, titulo: "CORTADOR DE RODILLO MULTIUSOS",                        descripcion: "Cortador de rodillo para instalación de películas y corte preciso de materiales.", modelo: "JL140", precio: 10500, categoria: "Corte", destacado: false }
     ];
 
     // ============================================================
@@ -401,40 +308,45 @@
     const abrirWhatsApp = (titulo, modelo) =>
       window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${mensajeWhatsApp(titulo, modelo)}`, "_blank");
 
+    const iconoHerramienta = `
+      <svg class="tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14.7 6.3a4.5 4.5 0 0 0-6.1 6.1L3 18l3 3 5.6-5.6a4.5 4.5 0 0 0 6.1-6.1l-3 3-2.1-2.1 3-3z"/>
+        <path d="m14.7 6.3 3.6-3.6 2.8 2.8-3.6 3.6"/>
+        <path d="m6.6 14.4-2.4 2.4"/>
+      </svg>`;
+
     // ============================================================
     // 3) RENDER DE TARJETAS
     // ============================================================
     const grid = document.getElementById("productos");
     const contador = document.getElementById("result-count");
+    const buscador = document.getElementById("buscador");
 
     function crearTarjeta(p) {
       const card = document.createElement("article");
       card.className = "card flex flex-col relative";
-      card.dataset.categoria = p.categoria;
-      card.dataset.nombre = (p.titulo + " " + p.modelo).toLowerCase();
 
       const badge = p.destacado
-        ? `<span class="absolute top-3 right-3 z-10 text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-blaze text-black shadow-blaze">Top</span>`
+        ? `<span class="absolute top-3 right-3 z-10 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-navy text-white shadow-soft">Recomendado</span>`
         : "";
 
       card.innerHTML = `
         <div class="thumb">
           <span class="badge-cat">${p.categoria}</span>
           ${badge}
-          <div class="glow-ring">
-            <div class="wheel"><span></span></div>
-          </div>
-          <span class="absolute bottom-3 right-3 z-10 text-[10px] font-bold tracking-widest text-white/70 uppercase">${p.modelo}</span>
+          <div class="ring"></div>
+          ${iconoHerramienta}
+          <span class="absolute bottom-2.5 right-3 z-10 text-[10px] font-bold tracking-widest text-slate-500 uppercase">${p.modelo}</span>
         </div>
         <div class="p-5 flex flex-col flex-1">
-          <h3 class="font-display text-white text-base sm:text-lg leading-snug uppercase tracking-tight">${p.titulo}</h3>
-          <p class="mt-2 text-sm text-gray-400 leading-relaxed flex-1">${p.descripcion}</p>
+          <h3 class="font-display font-bold text-navy text-base sm:text-lg leading-snug tracking-tight">${p.titulo}</h3>
+          <p class="mt-2 text-sm text-slate-500 leading-relaxed flex-1">${p.descripcion}</p>
           <div class="mt-3 flex items-center gap-2">
-            <span class="text-[11px] font-bold tracking-widest uppercase text-gray-500 border border-white/10 rounded-md px-2 py-1">Modelo ${p.modelo}</span>
+            <span class="text-[11px] font-bold tracking-widest uppercase text-slate-400 border border-slate-200 rounded-md px-2 py-1 bg-slate-50">Modelo ${p.modelo}</span>
           </div>
-          <p class="mt-4 text-2xl sm:text-[26px] font-display ${p.destacado ? 'price blaze' : 'price'} leading-none">${formatearPrecio(p.precio)}</p>
-          <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-1 mb-4">Precio COP · IVA incluido</p>
-          <button type="button" class="btn-wa ${p.destacado ? 'alt' : ''}">
+          <p class="mt-4 text-2xl font-display font-extrabold text-brand leading-none">${formatearPrecio(p.precio)}</p>
+          <p class="text-[10px] text-slate-400 uppercase tracking-widest mt-1 mb-4">Precio COP · IVA incluido</p>
+          <button type="button" class="btn-wa">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
@@ -479,19 +391,13 @@
       });
     });
 
-    // ============================================================
-    // 5) BÚSQUEDA EN VIVO  (Ctrl+F del navegador también sirve)
-    // ============================================================
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "/" && document.activeElement.tagName !== "INPUT") {
-        e.preventDefault();
-        const buscar = document.getElementById("buscador");
-        if (buscar) buscar.focus();
-      }
+    buscador.addEventListener("input", (e) => {
+      textoBusqueda = e.target.value.trim().toLowerCase();
+      renderizar();
     });
 
     // ============================================================
-    // 6) BOTÓN GENERAL DE WHATSAPP (CTA final)
+    // 5) BOTÓN GENERAL DE WHATSAPP (CTA final)
     // ============================================================
     document.getElementById("btn-wa-general").href =
       `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
@@ -499,7 +405,7 @@
       )}`;
 
     // ============================================================
-    // 7) INICIO
+    // 6) INICIO
     // ============================================================
     renderizar();
   </script>
