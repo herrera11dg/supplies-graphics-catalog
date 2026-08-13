@@ -192,24 +192,24 @@
     /* ===== categorías ===== */
     .cat-card {
       position: relative;
-      border-radius: 1.2rem; overflow: hidden;
-      background: linear-gradient(160deg, rgba(26,66,138,.5), rgba(13,37,80,.8));
-      border: 1px solid rgba(96,165,250,.22);
-      transition: transform .3s cubic-bezier(.22,1,.36,1), border-color .3s, background .3s;
+      border-radius: 1.2rem;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      transition: transform .3s cubic-bezier(.22,1,.36,1), border-color .3s, box-shadow .3s, background .3s;
       cursor: pointer;
     }
-    .cat-card:hover { transform: translateY(-6px); border-color: rgba(249,115,22,.7); }
+    .cat-card:hover { transform: translateY(-6px); border-color: rgba(249,115,22,.6); box-shadow: 0 18px 40px rgba(5,15,38,.14); background: #fff; }
     .cat-card .cat-icon {
       width: 60px; height: 60px; border-radius: 1.1rem; margin: 0 auto 1rem;
-      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
-      display: grid; place-items: center; color: #fbbf24;
+      background: #eff6ff; border: 1px solid #dbeafe;
+      display: grid; place-items: center; color: #2563eb;
       transition: background .3s, transform .3s, color .3s;
     }
-    .cat-card:hover .cat-icon { background: #f97316; color: #fff; transform: scale(1.06) rotate(-4deg); }
+    .cat-card:hover .cat-icon { background: #f97316; border-color: #f97316; color: #fff; transform: scale(1.06) rotate(-4deg); }
     .cat-card .cat-count {
       display: inline-block; font-family: 'Archivo'; font-size: .64rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
       padding: .25rem .6rem; border-radius: 9999px; margin-top: .55rem;
-      background: rgba(96,165,250,.18); color: #93c5fd; border: 1px solid rgba(96,165,250,.3);
+      background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe;
     }
 
     /* ===== botón flotante ===== */
@@ -284,91 +284,56 @@
       <div class="hero-glow" style="top:-80px;left:-60px;"></div>
       <div class="hero-glow" style="bottom:-140px;right:-80px;background:radial-gradient(circle, rgba(249,115,22,.22), transparent 65%);"></div>
 
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-14 pb-16 sm:pt-20 sm:pb-24 relative z-10">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-
-          <!-- Texto -->
-          <div class="text-center lg:text-left reveal visible">
-            <img src="logo.jpg" alt="Supplies Graphics"
-                 class="w-24 h-24 sm:w-28 sm:h-28 mx-auto lg:mx-0 rounded-full object-cover border-4 border-flame-500 shadow-glow mb-7" />
-            <span class="inline-flex items-center gap-2 text-[10px] sm:text-xs font-bold tracking-[.25em] uppercase text-amber-300 bg-white/5 border border-amber-300/30 rounded-full px-4 py-1.5 mb-5">
-              <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-whatsapp opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-whatsapp"></span></span>
-              Atención directa · Bogotá
-            </span>
-            <h1 class="font-display font-black text-white text-4xl sm:text-6xl xl:text-7xl leading-[1.02] tracking-tight">
-              Equipa tu taller<br class="hidden sm:block" />
-              <span class="shine-text">como un pro.</span>
-            </h1>
-            <p class="mt-6 max-w-lg mx-auto lg:mx-0 text-blue-200 text-sm sm:text-lg leading-relaxed">
-              Herramientas de precisión para <strong class="text-white">polarizado</strong>, <strong class="text-white">detailing</strong> y <strong class="text-white">PPF</strong>.
-              Referencias originales, precios justos y asesoría que sí responde.
-            </p>
-            <div class="mt-9 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
-              <a href="#catalogo" data-vista="catalogo" class="btn-flame w-full sm:w-auto nav-go">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18l-6 8v6l-6 2v-8L3 4z"/></svg>
-                Ver catálogo
-              </a>
-              <a id="wa-hero" href="#" target="_blank" class="btn-ghost w-full sm:w-auto">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                Cotizar
-              </a>
-            </div>
-          </div>
-
-          <!-- "Ficha técnica" estilo showroom -->
-          <div class="hidden lg:block reveal visible">
-            <div class="relative rounded-3xl border border-white/12 bg-gradient-to-br from-navy-800/80 to-navy-950/80 backdrop-blur-md p-8 shadow-lift overflow-hidden">
-              <div class="absolute top-0 right-0 w-40 h-40 bg-flame-500/10 rounded-full blur-2xl"></div>
-              <div class="flex items-center justify-between mb-7">
-                <p class="font-display font-bold text-white text-lg tracking-wide">SUPPLIES <span class="text-flame-500">GRAPHICS</span></p>
-                <span class="font-display text-[10px] font-bold tracking-[.2em] uppercase text-amber-300 border border-amber-300/30 rounded-full px-3 py-1">2026</span>
-              </div>
-              <div class="grid grid-cols-2 gap-4">
-                <div class="rounded-2xl bg-white/5 border border-white/10 p-5 text-center">
-                  <p class="num-stat text-3xl sm:text-4xl text-white" data-contar="28">0</p>
-                  <p class="text-[10px] uppercase tracking-[.2em] text-blue-200 mt-1">Referencias</p>
-                </div>
-                <div class="rounded-2xl bg-white/5 border border-white/10 p-5 text-center">
-                  <p class="num-stat text-3xl sm:text-4xl text-white" data-contar="4">0</p>
-                  <p class="text-[10px] uppercase tracking-[.2em] text-blue-200 mt-1">Categorías</p>
-                </div>
-                <div class="rounded-2xl bg-white/5 border border-white/10 p-5 text-center">
-                  <p class="num-stat text-3xl sm:text-4xl text-white" data-contar="100">0</p>
-                  <p class="text-[10px] uppercase tracking-[.2em] text-blue-200 mt-1">% Envíos nacionales</p>
-                </div>
-                <div class="rounded-2xl bg-white/5 border border-white/10 p-5 text-center">
-                  <p class="num-stat text-3xl sm:text-4xl text-flame-400" data-contar="4900">0</p>
-                  <p class="text-[10px] uppercase tracking-[.2em] text-blue-200 mt-1">Desde (COP)</p>
-                </div>
-              </div>
-              <div class="mt-6 flex items-center justify-between rounded-2xl bg-whatsapp/10 border border-whatsapp/30 px-5 py-4">
-                <div>
-                  <p class="text-[10px] uppercase tracking-[.2em] text-emerald-200">Respuesta</p>
-                  <p class="font-display font-bold text-white text-sm">Menos de 24 horas</p>
-                </div>
-                <svg class="w-6 h-6 text-whatsapp" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              </div>
-            </div>
-          </div>
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 pt-16 pb-20 sm:pt-24 sm:pb-28 relative z-10 text-center">
+        <img src="logo.jpg" alt="Supplies Graphics"
+             class="w-24 h-24 sm:w-28 sm:h-28 mx-auto rounded-full object-cover border-4 border-flame-500 shadow-glow mb-8" />
+        <span class="inline-flex items-center gap-2 text-[10px] sm:text-xs font-bold tracking-[.25em] uppercase text-amber-300 bg-white/5 border border-amber-300/30 rounded-full px-4 py-1.5 mb-6">
+          <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-whatsapp opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-whatsapp"></span></span>
+          Atención directa · Bogotá
+        </span>
+        <h1 class="font-display font-black text-white text-4xl sm:text-6xl xl:text-7xl leading-[1.02] tracking-tight">
+          Equipa tu taller<br class="hidden sm:block" />
+          <span class="shine-text">como un pro.</span>
+        </h1>
+        <p class="mt-7 max-w-2xl mx-auto text-blue-100 text-sm sm:text-lg leading-relaxed">
+          Herramientas de precisión para <strong class="text-white">polarizado</strong>, <strong class="text-white">detailing</strong> y <strong class="text-white">PPF</strong>.
+          Referencias originales, precios justos y asesoría que sí responde.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="#catalogo" data-vista="catalogo" class="btn-flame w-full sm:w-auto nav-go">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18l-6 8v6l-6 2v-8L3 4z"/></svg>
+            Ver catálogo
+          </a>
+          <a id="wa-hero" href="#" target="_blank" class="btn-ghost w-full sm:w-auto">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Pedir por WhatsApp
+          </a>
+        </div>
+        <div class="mt-10 flex flex-wrap items-center justify-center gap-3 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-blue-200/80">
+          <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10">Polarizado</span>
+          <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10">Detailing</span>
+          <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10">PPF</span>
+          <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10">Asesoría directa</span>
         </div>
       </div>
     </section>
 
     <!-- ============ CATEGORÍAS ============ -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-16">
-      <div class="text-center mb-10 reveal">
-        <p class="text-flame-400 text-xs font-bold tracking-[.3em] uppercase mb-2">Explora</p>
-        <h2 class="font-display font-black text-white text-3xl sm:text-5xl tracking-tight">¿Qué estás buscando?</h2>
-        <p class="mt-3 text-blue-200 text-sm sm:text-base">Toca una categoría y te llevo directo a lo que necesitas.</p>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+    <section class="bg-white py-16 sm:py-20 rounded-t-[2.5rem] relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-12 reveal">
+          <p class="text-flame-600 text-xs font-bold tracking-[.3em] uppercase mb-2">Explora</p>
+          <h2 class="font-display font-black text-navy-800 text-3xl sm:text-5xl tracking-tight">¿Qué estás buscando?</h2>
+          <p class="mt-3 text-slate-500 text-sm sm:text-base">Toca una categoría y te llevo directo a lo que necesitas.</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         <div class="cat-card nav-go reveal" data-vista="catalogo" data-cat="Limpieza">
           <div class="p-7 sm:p-8 text-center">
             <div class="cat-icon">
               <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 0 1 4-4h10a4 4 0 0 1 0 8H7a4 4 0 0 1-4-4zM5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4"/><path d="M9 5V3h6v2"/></svg>
             </div>
-            <h3 class="font-display font-bold text-white text-lg uppercase tracking-wide">Limpieza</h3>
-            <p class="text-blue-200 text-xs mt-1">Raspadores y escurridores</p>
+            <h3 class="font-display font-bold text-navy-800 text-lg uppercase tracking-wide">Limpieza</h3>
+            <p class="text-slate-400 text-xs mt-1">Raspadores y escurridores</p>
             <span class="cat-count" data-cat-count="Limpieza">0 productos</span>
           </div>
         </div>
@@ -377,8 +342,8 @@
             <div class="cat-icon">
               <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 17l11-11M15 5l4 4M8 12l4-4M7 17a3 3 0 1 0 6 0 3 3 0 0 0-6 0zM15 17a3 3 0 1 0 6 0 3 3 0 0 0-6 0z"/></svg>
             </div>
-            <h3 class="font-display font-bold text-white text-lg uppercase tracking-wide">Corte</h3>
-            <p class="text-blue-200 text-xs mt-1">Bisturís y cuchillas</p>
+            <h3 class="font-display font-bold text-navy-800 text-lg uppercase tracking-wide">Corte</h3>
+            <p class="text-slate-400 text-xs mt-1">Bisturís y cuchillas</p>
             <span class="cat-count" data-cat-count="Corte">0 productos</span>
           </div>
         </div>
@@ -387,8 +352,8 @@
             <div class="cat-icon">
               <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a4.5 4.5 0 0 0-6.1 6.1L3 18l3 3 5.6-5.6a4.5 4.5 0 0 0 6.1-6.1l-3 3-2.1-2.1 3-3zM14.7 6.3 18.3 2.7l2.8 2.8-3.6 3.6M6.6 14.4l-2.4 2.4"/></svg>
             </div>
-            <h3 class="font-display font-bold text-white text-lg uppercase tracking-wide">Herramientas<br class="hidden" /> Polarizado</h3>
-            <p class="text-blue-200 text-xs mt-1">Espátulas y más</p>
+            <h3 class="font-display font-bold text-navy-800 text-lg uppercase tracking-wide">Herramientas Polarizado</h3>
+            <p class="text-slate-400 text-xs mt-1">Espátulas y más</p>
             <span class="cat-count" data-cat-count="Herramientas Polarizado">0 productos</span>
           </div>
         </div>
@@ -397,11 +362,12 @@
             <div class="cat-icon">
               <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7 12 3 4 7v10l8 4 8-4V7zM12 3v8M4 7l8 4 8-4M12 11v9"/></svg>
             </div>
-            <h3 class="font-display font-bold text-white text-lg uppercase tracking-wide">Kits</h3>
-            <p class="text-blue-200 text-xs mt-1">Sets completos</p>
+            <h3 class="font-display font-bold text-navy-800 text-lg uppercase tracking-wide">Kits</h3>
+            <p class="text-slate-400 text-xs mt-1">Sets completos</p>
             <span class="cat-count" data-cat-count="Kits">0 productos</span>
           </div>
         </div>
+      </div>
       </div>
     </section>
 
@@ -421,13 +387,13 @@
 
     <!-- ============ CTA ============ -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-16">
-      <div class="rounded-3xl overflow-hidden relative reveal">
-        <div class="absolute inset-0 bg-gradient-to-r from-navy-700 via-navy-800 to-navy-900"></div>
-        <div class="absolute inset-0 opacity-25" style="background-image:radial-gradient(circle at 25% 20%, #f97316 1.5px, transparent 1.5px); background-size:26px 26px;"></div>
+      <div class="rounded-3xl overflow-hidden relative reveal bg-white border border-slate-200 shadow-lift">
+        <div class="absolute inset-0 opacity-25" style="background-image:radial-gradient(circle at 25% 20%, #2563eb 1.5px, transparent 1.5px); background-size:26px 26px;"></div>
         <div class="p-8 sm:p-14 relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
           <div class="text-center lg:text-left max-w-xl">
-            <h3 class="font-display font-black text-white text-2xl sm:text-4xl tracking-tight">¿No encuentras tu herramienta?</h3>
-            <p class="mt-3 text-blue-200 text-sm sm:text-base">Manejamos línea completa en polarizado, detailing y PPF. Escríbenos y te conseguimos la referencia que necesitas.</p>
+            <p class="text-flame-600 text-xs font-bold tracking-[.3em] uppercase mb-2">Asesoría directa</p>
+            <h3 class="font-display font-black text-navy-800 text-2xl sm:text-4xl tracking-tight">¿No encuentras tu herramienta?</h3>
+            <p class="mt-3 text-slate-500 text-sm sm:text-base">Manejamos línea completa en polarizado, detailing y PPF. Escríbenos y te conseguimos la referencia que necesitas.</p>
           </div>
           <a id="wa-cta" href="#" target="_blank" class="btn-flame whitespace-nowrap">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -794,28 +760,12 @@
       if (h.scrollTop > 30) header.classList.add("!bg-navy-950/95");
     });
 
-    function animarContadores() {
-      document.querySelectorAll("[data-contar]").forEach((el) => {
-        const meta = parseInt(el.dataset.contar, 10);
-        const inicio = performance.now();
-        const dur = 1100;
-        function paso(t) {
-          const p = Math.min((t - inicio) / dur, 1);
-          const val = Math.round(meta * (1 - Math.pow(1 - p, 3)));
-          el.textContent = new Intl.NumberFormat("es-CO").format(val);
-          if (p < 1) requestAnimationFrame(paso);
-        }
-        requestAnimationFrame(paso);
-      });
-    }
-
     // ============================================================
     // 10) INICIO
     // ============================================================
     renderizar();
     renderDestacados();
     observarReveal();
-    animarContadores();
   </script>
 </body>
 </html>
