@@ -3,53 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Supplies Graphics — Catálogo Virtual</title>
-  <meta name="description" content="Catálogo virtual de herramientas profesionales para polarizados, detailing y PPF. Calidad industrial, precios en COP." />
+  <title>Supplies Graphics — Catálogo de Herramienta</title>
+  <meta name="description" content="Herramientas profesionales para polarizados, detailing y PPF. Catálogo de herramienta, precios en COP y pedidos por WhatsApp." />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            brand: '#2563eb',
-            navy: '#1e3a8a',
-            skyline: '#eff6ff',
+            navy: { 900:'#081a3c', 800:'#0d2550', 700:'#123064', 600:'#1a428a', 500:'#2563eb', 400:'#60a5fa', 100:'#dbeafe' },
+            flame: { 600:'#ea580c', 500:'#f97316', 400:'#fb923c' },
             whatsapp: '#25D366',
           },
           fontFamily: {
             display: ['"Segoe UI"', 'Arial', 'sans-serif'],
           },
           boxShadow: {
-            soft: '0 10px 30px rgba(30, 58, 138, .08)',
-            lift: '0 16px 40px rgba(30, 58, 138, .14)',
+            soft: '0 10px 30px rgba(8,26,60,.25)',
+            lift: '0 16px 40px rgba(8,26,60,.35)',
+            glow: '0 0 0 1px rgba(249,115,22,.4), 0 10px 30px rgba(249,115,22,.25)',
           },
         }
       }
     }
 
     body { font-family: 'Segoe UI', Arial, sans-serif; }
-
-    ::selection { background: #bfdbfe; color: #1e3a8a; }
+    ::selection { background: #f97316; color: #fff; }
 
     ::-webkit-scrollbar { width: 10px; }
-    ::-webkit-scrollbar-track { background: #f1f5f9; }
-    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
-    ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
+    ::-webkit-scrollbar-track { background: #0d2550; }
+    ::-webkit-scrollbar-thumb { background: #1a428a; border-radius: 8px; }
+    ::-webkit-scrollbar-thumb:hover { background: #f97316; }
 
-    /* ---------- Cards ---------- */
+    /* ---------- Fondo de la página ---------- */
+    .app-bg {
+      background:
+        radial-gradient(ellipse at 15% 0%, rgba(37,99,235,.25), transparent 50%),
+        radial-gradient(ellipse at 90% 100%, rgba(249,115,22,.12), transparent 45%),
+        linear-gradient(180deg, #081a3c 0%, #0d2550 60%, #081a3c 100%);
+    }
+
+    .grid-pattern {
+      background-image:
+        linear-gradient(rgba(96,165,250,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(96,165,250,.06) 1px, transparent 1px);
+      background-size: 34px 34px;
+    }
+
+    /* ---------- Cards de producto ---------- */
     .card {
       background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 1.1rem;
+      border-radius: 1rem;
       overflow: hidden;
-      transition: transform .25s, box-shadow .25s, border-color .25s;
+      transition: transform .25s, box-shadow .25s;
       animation: rise .5s ease both;
     }
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: #bfdbfe;
-      box-shadow: 0 16px 40px rgba(30, 58, 138, .14);
-    }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 18px 42px rgba(8,26,60,.45); }
     @keyframes rise {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -58,28 +67,23 @@
     .thumb {
       position: relative;
       aspect-ratio: 16 / 11;
-      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 60%, #e0f2fe 100%);
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 55%, #c7d2fe 100%);
       display: grid;
       place-items: center;
       overflow: hidden;
     }
-    .thumb .tool {
-      width: 40%;
-      color: #93c5fd;
-      filter: drop-shadow(0 6px 10px rgba(37, 99, 235, .25));
-    }
+    .thumb .tool { width: 38%; color: #2563eb; filter: drop-shadow(0 6px 10px rgba(37,99,235,.3)); }
     .thumb .ring {
-      position: absolute;
-      inset: 8%;
-      border: 1.5px dashed #bfdbfe;
-      border-radius: 1rem;
+      position: absolute; inset: 8%;
+      border: 1.5px dashed rgba(37,99,235,.35); border-radius: 1rem;
     }
 
+    /* ---------- Chips de filtro ---------- */
     .chip {
-      border: 1px solid #e2e8f0;
-      background: #fff;
-      color: #475569;
-      padding: .5rem 1rem;
+      border: 1px solid rgba(96,165,250,.4);
+      background: rgba(255,255,255,.06);
+      color: #bfdbfe;
+      padding: .5rem 1.05rem;
       border-radius: 9999px;
       font-size: .78rem;
       font-weight: 700;
@@ -88,169 +92,278 @@
       white-space: nowrap;
       cursor: pointer;
     }
-    .chip:hover { border-color: #93c5fd; color: #2563eb; background: #eff6ff; }
-    .chip.active {
-      background: #2563eb;
-      border-color: #2563eb;
-      color: #fff;
-      box-shadow: 0 6px 16px rgba(37, 99, 235, .3);
-    }
+    .chip:hover { border-color: #f97316; color: #fff; background: rgba(249,115,22,.15); }
+    .chip.active { background: #f97316; border-color: #f97316; color: #fff; box-shadow: 0 6px 18px rgba(249,115,22,.4); }
 
+    /* ---------- Botones ---------- */
     .btn-wa {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: .5rem;
-      width: 100%;
-      padding: .78rem 1rem;
-      border-radius: .8rem;
-      font-weight: 700;
-      font-size: .9rem;
-      color: #fff;
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      width: 100%; padding: .78rem 1rem; border-radius: .8rem;
+      font-weight: 700; font-size: .9rem; color: #fff;
       background: linear-gradient(135deg, #25D366, #128C7E);
       transition: transform .15s, box-shadow .2s, filter .2s;
     }
-    .btn-wa:hover { filter: brightness(1.08); box-shadow: 0 10px 24px rgba(37, 211, 102, .35); }
+    .btn-wa:hover { filter: brightness(1.08); box-shadow: 0 10px 24px rgba(37,211,102,.4); }
     .btn-wa:active { transform: scale(.97); }
 
+    .btn-flame {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      padding: .8rem 1.6rem; border-radius: .9rem;
+      font-weight: 800; font-size: .9rem; text-transform: uppercase; letter-spacing: .05em;
+      color: #fff; background: linear-gradient(135deg, #f97316, #ea580c);
+      transition: transform .15s, box-shadow .2s, filter .2s;
+    }
+    .btn-flame:hover { filter: brightness(1.08); box-shadow: 0 10px 26px rgba(249,115,22,.4); }
+    .btn-flame:active { transform: scale(.97); }
+
     .badge-cat {
-      position: absolute;
-      top: .7rem;
-      left: .7rem;
-      z-index: 5;
-      font-size: .62rem;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      padding: .3rem .65rem;
-      border-radius: 9999px;
-      background: rgba(255,255,255,.92);
-      color: #2563eb;
-      border: 1px solid #bfdbfe;
+      position: absolute; top: .7rem; left: .7rem; z-index: 5;
+      font-size: .6rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      padding: .3rem .65rem; border-radius: 9999px;
+      background: rgba(13,37,80,.85); color: #fbbf24; border: 1px solid rgba(251,191,36,.4);
     }
 
-    .hero {
-      background:
-        radial-gradient(ellipse at 20% 0%, rgba(191,219,254,.6), transparent 55%),
-        radial-gradient(ellipse at 80% 100%, rgba(219,234,254,.7), transparent 55%),
-        #f8fafc;
+    /* ---------- Categorías ---------- */
+    .cat-card {
+      background: linear-gradient(160deg, rgba(26,66,138,.55), rgba(13,37,80,.7));
+      border: 1px solid rgba(96,165,250,.25);
+      border-radius: 1rem;
+      transition: transform .25s, border-color .25s, background .25s;
+      cursor: pointer;
     }
+    .cat-card:hover { transform: translateY(-4px); border-color: #f97316; background: linear-gradient(160deg, rgba(26,66,138,.75), rgba(13,37,80,.9)); }
+
+    /* ---------- Transición entre vistas ---------- */
+    .view { animation: fadeIn .45s ease both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+    /* ---------- Nav ---------- */
+    .nav-link { color: #bfdbfe; font-weight: 600; font-size: .9rem; padding: .4rem .75rem; border-radius: .5rem; transition: color .2s, background .2s; }
+    .nav-link:hover { color: #fff; background: rgba(96,165,250,.15); }
+    .nav-link.active { color: #fff; background: #f97316; }
   </style>
 </head>
 
-<body class="bg-[#f6f8fc] text-slate-700 antialiased min-h-screen">
+<body class="app-bg text-white antialiased min-h-screen">
+  <div class="fixed inset-0 grid-pattern pointer-events-none opacity-40"></div>
 
   <!-- ================= HEADER ================= -->
-  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
+  <header class="sticky top-0 z-50 bg-navy-900/85 backdrop-blur-md border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
-      <div class="flex items-center gap-3">
-        <img src="logo.jpg" alt="Logo Supplies Graphics"
-             class="w-11 h-11 rounded-full object-cover border border-slate-200 shadow-soft" />
+      <a href="#inicio" data-vista="inicio" class="nav-go flex items-center gap-3">
+        <img src="logo.jpg" alt="Logo Supplies Graphics" class="w-10 h-10 rounded-full object-cover border-2 border-flame-500" />
         <div class="leading-tight">
-          <p class="font-display font-extrabold text-navy text-base sm:text-lg tracking-wide">SUPPLIES <span class="text-brand">GRAPHICS</span></p>
-          <p class="text-[10px] sm:text-xs text-slate-400 tracking-[.25em] uppercase">Polarizado · Detailing · PPF</p>
+          <p class="font-display font-extrabold text-white text-base sm:text-lg tracking-wide">SUPPLIES <span class="text-flame-500">GRAPHICS</span></p>
+          <p class="text-[9px] sm:text-[10px] text-blue-200 tracking-[.25em] uppercase">Polarizado · Detailing · PPF</p>
         </div>
-      </div>
-      <div class="hidden sm:flex items-center gap-2">
-        <a href="#catalogo" class="text-sm font-semibold text-slate-600 hover:text-brand px-3 py-2">Catálogo</a>
-        <a href="#contacto" class="text-sm font-semibold text-slate-600 hover:text-brand px-3 py-2">Contacto</a>
-        <a href="#catalogo" class="chip !bg-navy !border-navy !text-white hover:!bg-brand">Ver catálogo</a>
-      </div>
-      <a href="#catalogo" class="sm:hidden chip">Ver catálogo</a>
+      </a>
+      <nav class="hidden md:flex items-center gap-1">
+        <a href="#inicio" data-vista="inicio" class="nav-link active">Inicio</a>
+        <a href="#catalogo" data-vista="catalogo" class="nav-link">Catálogo Herramienta</a>
+        <a href="#contacto" data-vista="inicio" data-ancla="contacto" class="nav-link nav-contacto">Contacto</a>
+        <a href="#" class="btn-flame !py-2 !px-4 !text-xs ml-2" id="wa-header">Pedir por WhatsApp</a>
+      </nav>
+      <button id="btn-menu" class="md:hidden p-2 rounded-lg border border-white/20 text-white">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <!-- menú móvil -->
+    <div id="menu-movil" class="hidden md:hidden border-t border-white/10 bg-navy-900/95 px-4 py-3 flex flex-col gap-1">
+      <a href="#inicio" data-vista="inicio" class="nav-link nav-go">Inicio</a>
+      <a href="#catalogo" data-vista="catalogo" class="nav-link nav-go">Catálogo Herramienta</a>
+      <a href="#contacto" data-vista="inicio" data-ancla="contacto" class="nav-link nav-contacto">Contacto</a>
+      <a href="#" class="btn-flame !py-2.5 !text-xs mt-1" id="wa-header-movil">Pedir por WhatsApp</a>
     </div>
   </header>
 
-  <!-- ================= HERO ================= -->
-  <section class="hero relative overflow-hidden pt-14 pb-12 sm:pt-20 sm:pb-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center relative z-10">
-      <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-bold tracking-[.2em] uppercase text-brand bg-blue-50 border border-blue-100 rounded-full px-4 py-1.5 mb-6">
-        <span class="w-2 h-2 rounded-full bg-whatsapp"></span>
-        Catálogo Virtual · Bogotá, Colombia
-      </span>
-      <h1 class="font-display font-extrabold text-navy text-4xl sm:text-5xl lg:text-6xl leading-[1.08] tracking-tight">
-        Herramientas profesionales<br class="hidden sm:block" />
-        <span class="text-brand">para tu taller</span>
-      </h1>
-      <p class="mt-5 max-w-2xl mx-auto text-slate-500 text-sm sm:text-base leading-relaxed">
-        Equipamiento de calidad industrial para <strong class="text-navy">polarizados</strong>,
-        <strong class="text-navy">detailing</strong> y <strong class="text-navy">PPF</strong>.
-        Precios en pesos colombianos y pedidos directos por WhatsApp.
-      </p>
-      <div class="mt-8 flex flex-wrap items-center justify-center gap-3 text-xs font-semibold uppercase tracking-wider">
-        <span class="px-4 py-2 rounded-lg bg-white border border-slate-200 shadow-soft">+ 30 Referencias</span>
-        <span class="px-4 py-2 rounded-lg bg-white border border-slate-200 shadow-soft">Envío a toda Colombia</span>
-        <span class="px-4 py-2 rounded-lg bg-white border border-slate-200 shadow-soft">Pedidos por WhatsApp</span>
-      </div>
-    </div>
-  </section>
+  <!-- ========================================================
+       VISTA 1 · INICIO
+  ======================================================== -->
+  <div id="vista-inicio" class="view relative z-10">
 
-  <!-- ================= CATALOG ================= -->
-  <main id="catalogo" class="max-w-7xl mx-auto px-4 sm:px-6 pb-20">
-
-    <div class="flex flex-wrap items-end justify-between gap-3 mb-5">
-      <div>
-        <p class="text-brand text-xs font-bold tracking-[.25em] uppercase mb-1">Catálogo</p>
-        <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-navy tracking-tight">Nuestros productos</h2>
-      </div>
-      <p id="result-count" class="text-xs text-slate-400 font-semibold uppercase tracking-wider"></p>
-    </div>
-
-    <!-- Filtros + búsqueda -->
-    <div class="sticky top-[64px] sm:top-[72px] z-40 -mx-4 px-4 sm:mx-0 sm:px-0 bg-[#f6f8fc]/95 backdrop-blur-md py-3 mb-6">
-      <div class="flex items-center gap-3">
-        <div id="filtros" class="flex gap-2 overflow-x-auto pb-1 flex-1">
-          <button class="chip active" data-filter="todos">Todos</button>
-          <button class="chip" data-filter="Limpieza">Limpieza</button>
-          <button class="chip" data-filter="Corte">Corte</button>
-          <button class="chip" data-filter="Herramientas Polarizado">Herramientas Polarizado</button>
-          <button class="chip" data-filter="Kits">Kits</button>
-        </div>
-        <div class="hidden sm:block relative">
-          <input id="buscador" type="text" placeholder="Buscar producto o modelo..."
-                 class="w-56 pl-9 pr-3 py-2 text-sm rounded-full border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400" />
-          <svg class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <circle cx="11" cy="11" r="7"></circle><path stroke-linecap="round" d="m21 21-4.3-4.3"></path>
-          </svg>
-        </div>
-      </div>
-    </div>
-
-    <!-- Grid de productos -->
-    <div id="productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"></div>
-
-    <!-- CTA -->
-    <section id="contacto" class="mt-16 rounded-3xl overflow-hidden bg-navy relative">
-      <div class="absolute inset-0 opacity-10"
-           style="background-image:radial-gradient(circle at 20% 30%, #fff 1.5px, transparent 1.5px); background-size:26px 26px;"></div>
-      <div class="p-8 sm:p-12 text-center relative z-10">
-        <h3 class="font-display font-extrabold text-white text-2xl sm:text-3xl tracking-tight">
-          ¿No encuentras lo que buscas?
-        </h3>
-        <p class="mt-3 text-blue-100 max-w-xl mx-auto text-sm sm:text-base">
-          Manejo de línea completa en polarizado, detailing y PPF. Escríbenos y consigue tu herramienta.
+    <!-- HERO -->
+    <section class="relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-14 sm:pt-24 sm:pb-20 text-center relative z-10">
+        <span class="inline-flex items-center gap-2 text-[10px] sm:text-xs font-bold tracking-[.25em] uppercase text-amber-300 bg-white/5 border border-amber-300/40 rounded-full px-4 py-1.5 mb-6">
+          <span class="w-2 h-2 rounded-full bg-whatsapp"></span>
+          Bogotá, Colombia · Envíos nacionales
+        </span>
+        <h1 class="font-display font-extrabold text-white text-4xl sm:text-6xl lg:text-7xl leading-[1.05] tracking-tight">
+          Todo en un solo lugar<br class="hidden sm:block" />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-flame-500 to-orange-400">para tu taller</span>
+        </h1>
+        <p class="mt-6 max-w-2xl mx-auto text-blue-200 text-sm sm:text-lg leading-relaxed">
+          Herramientas profesionales para <strong class="text-white">polarizados</strong>, <strong class="text-white">detailing</strong> y <strong class="text-white">PPF</strong>.
+          Calidad industrial, precios en pesos colombianos y atención directa.
         </p>
-        <a id="btn-wa-general" href="#" target="_blank"
-           class="mt-7 inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-whatsapp text-white font-bold text-sm uppercase tracking-wider hover:brightness-110 active:scale-95 transition shadow-lg">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
-          Pedir por WhatsApp
-        </a>
+        <div class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="#catalogo" data-vista="catalogo" class="btn-flame nav-go w-full sm:w-auto">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            Ver Catálogo Herramienta
+          </a>
+          <a id="wa-hero" href="#" target="_blank" class="btn-wa !w-auto px-6">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Cotizar por WhatsApp
+          </a>
+        </div>
+        <div class="mt-10 flex flex-wrap items-center justify-center gap-3 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-blue-200">
+          <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10">+ 30 Referencias</span>
+          <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10">Envío a toda Colombia</span>
+          <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10">Pedidos por WhatsApp</span>
+        </div>
       </div>
     </section>
-  </main>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="border-t border-slate-200 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-3 text-center sm:text-left">
-        <img src="logo.jpg" alt="Supplies Graphics" class="w-9 h-9 rounded-full object-cover border border-slate-200" />
-        <div>
-          <p class="font-display font-extrabold text-navy tracking-wide">SUPPLIES <span class="text-brand">GRAPHICS</span></p>
-          <p class="text-xs text-slate-400">Herramientas profesionales · Polarizado · Detailing · PPF</p>
+    <!-- CATEGORÍAS -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+      <div class="text-center mb-9">
+        <p class="text-flame-400 text-xs font-bold tracking-[.3em] uppercase mb-2">Explora</p>
+        <h2 class="font-display font-extrabold text-white text-2xl sm:text-4xl tracking-tight">¿Qué estás buscando?</h2>
+        <p class="mt-2 text-blue-200 text-sm">Navega por nuestras categorías y encuentra fácilmente lo que necesitas.</p>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <div class="cat-card nav-go" data-vista="catalogo" data-cat="Limpieza">
+          <div class="p-6 sm:p-8 text-center">
+            <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/10 grid place-items-center text-amber-300">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 0 1 4-4h10a4 4 0 0 1 0 8H7a4 4 0 0 1-4-4zM5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4"/><path d="M9 5V3h6v2"/></svg>
+            </div>
+            <h3 class="font-display font-bold text-white text-sm sm:text-base uppercase tracking-wide">Limpieza</h3>
+            <p class="text-blue-200 text-xs mt-1.5">Raspadores y escurridores</p>
+          </div>
+        </div>
+        <div class="cat-card nav-go" data-vista="catalogo" data-cat="Corte">
+          <div class="p-6 sm:p-8 text-center">
+            <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/10 grid place-items-center text-amber-300">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 17l11-11M15 5l4 4M8 12l4-4M7 17a3 3 0 1 0 6 0 3 3 0 0 0-6 0zM15 17a3 3 0 1 0 6 0 3 3 0 0 0-6 0z"/></svg>
+            </div>
+            <h3 class="font-display font-bold text-white text-sm sm:text-base uppercase tracking-wide">Corte</h3>
+            <p class="text-blue-200 text-xs mt-1.5">Bisturís y cuchillas</p>
+          </div>
+        </div>
+        <div class="cat-card nav-go" data-vista="catalogo" data-cat="Herramientas Polarizado">
+          <div class="p-6 sm:p-8 text-center">
+            <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/10 grid place-items-center text-amber-300">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a4.5 4.5 0 0 0-6.1 6.1L3 18l3 3 5.6-5.6a4.5 4.5 0 0 0 6.1-6.1l-3 3-2.1-2.1 3-3zM14.7 6.3 18.3 2.7l2.8 2.8-3.6 3.6M6.6 14.4l-2.4 2.4"/></svg>
+            </div>
+            <h3 class="font-display font-bold text-white text-sm sm:text-base uppercase tracking-wide">Herramientas Polarizado</h3>
+            <p class="text-blue-200 text-xs mt-1.5">Espátulas y más</p>
+          </div>
+        </div>
+        <div class="cat-card nav-go" data-vista="catalogo" data-cat="Kits">
+          <div class="p-6 sm:p-8 text-center">
+            <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/10 grid place-items-center text-amber-300">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7 12 3 4 7v10l8 4 8-4V7zM12 3v8M4 7l8 4 8-4M12 11v9"/></svg>
+            </div>
+            <h3 class="font-display font-bold text-white text-sm sm:text-base uppercase tracking-wide">Kits</h3>
+            <p class="text-blue-200 text-xs mt-1.5">Sets completos</p>
+          </div>
         </div>
       </div>
-      <p class="text-xs text-slate-400 text-center">© 2026 Supplies Graphics · Bogotá, Colombia</p>
+    </section>
+
+    <!-- PRODUCTOS DESTACADOS -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+      <div class="flex flex-wrap items-end justify-between gap-3 mb-7">
+        <div>
+          <p class="text-flame-400 text-xs font-bold tracking-[.3em] uppercase mb-2">Lo más pedido</p>
+          <h2 class="font-display font-extrabold text-white text-2xl sm:text-4xl tracking-tight">Productos Destacados</h2>
+        </div>
+        <a href="#catalogo" data-vista="catalogo" class="nav-go text-sm font-bold text-flame-400 hover:text-flame-500 uppercase tracking-wider">Ver todos los productos →</a>
+      </div>
+      <div id="destacados" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"></div>
+    </section>
+
+    <!-- CTA COTIZAR -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+      <div class="rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-r from-navy-700 to-navy-800 relative">
+        <div class="absolute inset-0 opacity-20" style="background-image:radial-gradient(circle at 20% 30%, #f97316 1.5px, transparent 1.5px); background-size:24px 24px;"></div>
+        <div class="p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-6 relative z-10">
+          <div class="text-center sm:text-left">
+            <h3 class="font-display font-extrabold text-white text-xl sm:text-3xl tracking-tight">¿Necesitas cotizar herramientas?</h3>
+            <p class="mt-2 text-blue-200 text-sm sm:text-base">Te atendemos directo, respondemos rápido y hacemos envíos a toda Colombia.</p>
+          </div>
+          <a id="wa-cta" href="#" target="_blank" class="btn-flame whitespace-nowrap">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Cotizar
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ========================================================
+       VISTA 2 · CATÁLOGO (tipo revista)
+  ======================================================== -->
+  <div id="vista-catalogo" class="view relative z-10 hidden">
+
+    <section class="relative overflow-hidden border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 text-center relative z-10">
+        <p class="text-flame-400 text-xs font-bold tracking-[.3em] uppercase mb-3">Revista virtual 2026</p>
+        <h1 class="font-display font-extrabold text-white text-4xl sm:text-6xl tracking-tight">Catálogo de <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-flame-500">Herramienta</span></h1>
+        <p class="mt-4 text-blue-200 text-sm sm:text-base max-w-xl mx-auto">Polarizado · Detailing · PPF — toca cualquier producto y pídelo directo por WhatsApp.</p>
+      </div>
+    </section>
+
+    <!-- Filtros + búsqueda -->
+    <div class="sticky top-[62px] sm:top-[68px] z-40 bg-navy-900/90 backdrop-blur-md border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3">
+        <div class="flex items-center gap-3">
+          <div id="filtros" class="flex gap-2 overflow-x-auto pb-1 flex-1">
+            <button class="chip active" data-filter="todos">Todos</button>
+            <button class="chip" data-filter="Limpieza">Limpieza</button>
+            <button class="chip" data-filter="Corte">Corte</button>
+            <button class="chip" data-filter="Herramientas Polarizado">Herramientas Polarizado</button>
+            <button class="chip" data-filter="Kits">Kits</button>
+          </div>
+          <div class="hidden sm:block relative">
+            <input id="buscador" type="text" placeholder="Buscar producto o modelo..."
+                   class="w-52 pl-9 pr-3 py-2 text-sm rounded-full border border-white/20 bg-white/10 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-flame-500 focus:border-flame-500" />
+            <svg class="w-4 h-4 text-blue-300 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path stroke-linecap="round" d="m21 21-4.3-4.3"></path></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <div class="flex items-center justify-between mb-6">
+        <p id="result-count" class="text-xs text-blue-200 font-semibold uppercase tracking-wider"></p>
+        <a href="#inicio" data-vista="inicio" class="nav-go text-xs font-bold text-blue-200 hover:text-flame-400 uppercase tracking-wider">← Volver al inicio</a>
+      </div>
+
+      <!-- Grid de productos (diseño editorial/revista) -->
+      <div id="productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"></div>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER (ambas vistas) ================= -->
+  <footer id="contacto" class="border-t border-white/10 bg-navy-900/80 relative z-10 mt-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <div>
+          <div class="flex items-center gap-3 mb-3">
+            <img src="logo.jpg" alt="Supplies Graphics" class="w-10 h-10 rounded-full object-cover border-2 border-flame-500" />
+            <p class="font-display font-extrabold text-white tracking-wide">SUPPLIES <span class="text-flame-500">GRAPHICS</span></p>
+          </div>
+          <p class="text-sm text-blue-200 leading-relaxed">Herramientas profesionales para polarizados, detailing y PPF. Calidad industrial y atención directa.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-white uppercase tracking-wider text-sm mb-3">Contacto</h4>
+          <p class="text-sm text-blue-200 mb-2">Bogotá, Colombia</p>
+          <a id="wa-footer" href="#" target="_blank" class="text-sm text-flame-400 hover:text-flame-500 font-semibold">WhatsApp: +57 310 878 7928</a>
+        </div>
+        <div>
+          <h4 class="font-bold text-white uppercase tracking-wider text-sm mb-3">Catálogo</h4>
+          <div class="flex flex-col gap-1 text-sm text-blue-200">
+            <a href="#catalogo" data-vista="catalogo" class="nav-go hover:text-flame-400">Ver catálogo de herramienta</a>
+            <a href="#catalogo" data-vista="catalogo" data-cat="Limpieza" class="nav-go hover:text-flame-400">Limpieza</a>
+            <a href="#catalogo" data-vista="catalogo" data-cat="Corte" class="nav-go hover:text-flame-400">Corte</a>
+            <a href="#catalogo" data-vista="catalogo" data-cat="Kits" class="nav-go hover:text-flame-400">Kits</a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8 pt-6 border-t border-white/10 text-center">
+        <p class="text-xs text-blue-200/70">© 2026 Supplies Graphics · Bogotá, Colombia</p>
+      </div>
     </div>
   </footer>
 
@@ -264,7 +377,7 @@
     const WHATSAPP_NUMBER = "573108787928";
 
     const productos = [
-      { id: 1,  titulo: "RASPADOR DE VIDRIO MANGO LARGO",                       descripcion: "Herramienta de largo alcance para remoción de adhesivos, residuos y material sobrante en superficies de vidrio.", modelo: "JL358", precio: 17500, categoria: "Limpieza", destacado: false },
+      { id: 1,  titulo: "RASPADOR DE VIDRIO MANGO LARGO",                       descripcion: "Herramienta de largo alcance para remoción de adhesivos, residuos y material sobrante en superficies de vidrio.", modelo: "JL358", precio: 17500, categoria: "Limpieza", destacado: true },
       { id: 2,  titulo: "RASPADOR ALUMINIO MANGO LARGO (CORTE)",                descripcion: "Raspador de aluminio con mango largo (BLUEMAX 25,5 x 13 cm) para corte y remoción de material adhesivo.", modelo: "JL350", precio: 42000, categoria: "Limpieza", destacado: false },
       { id: 3,  titulo: "RASPADOR RANURADO AZUL",                               descripcion: "Raspador ergonómico ranurado azul, ideal para trabajo de limpieza y corte de precisión.", modelo: "JL353", precio: 24500, categoria: "Limpieza", destacado: false },
       { id: 4,  titulo: "RASPADOR RANURADO ROJO",                               descripcion: "Raspador ergonómico ranurado rojo, ideal para trabajo de limpieza y corte de precisión.", modelo: "JL353", precio: 24500, categoria: "Limpieza", destacado: false },
@@ -285,11 +398,11 @@
       { id: 19, titulo: "REPUESTOS PARA RASPADOR DE SILICONA ROJO",             descripcion: "Hojas de reemplazo de alta resistencia para mantener la superficie libre de daños.", modelo: "JL423", precio: 7000, categoria: "Limpieza", destacado: false },
       { id: 20, titulo: "REPUESTOS PARA RASPADOR DE SILICONA VERDE",            descripcion: "Hojas de reemplazo de alta resistencia para mantener la superficie libre de daños.", modelo: "JL423", precio: 7000, categoria: "Limpieza", destacado: false },
       { id: 21, titulo: "REPUESTO CUCHILLA DE GOMA NEGRA",                      descripcion: "Repuesto de cuchilla en goma para escurridor, ideal para el trabajo limpio sobre películas y vinilos.", modelo: "JL534", precio: 17500, categoria: "Limpieza", destacado: false },
-      { id: 22, titulo: "KIT DE HERRAMIENTAS ESPECIAL PARA PELÍCULAS",          descripcion: "Set integral con los elementos esenciales para medir, cortar y ajustar películas protectoras. Instalación profesional de principio a fin.", modelo: "JL530", precio: 17500, categoria: "Kits", destacado: false },
+      { id: 22, titulo: "KIT DE HERRAMIENTAS ESPECIAL PARA PELÍCULAS",          descripcion: "Set integral con los elementos esenciales para medir, cortar y ajustar películas protectoras. Instalación profesional de principio a fin.", modelo: "JL530", precio: 17500, categoria: "Kits", destacado: true },
       { id: 23, titulo: "BISTURÍ UTILITARIO LANZA 9MM",                         descripcion: "Cuchilla de seguridad para corte de precisión y trabajo manual de materiales.", modelo: "JL532", precio: 10500, categoria: "Corte", destacado: false },
-      { id: 24, titulo: "BISTURÍ TAJIMA EC 303",                                descripcion: "Instrumento de corte de precisión japonesa con cuerpo ergonómico. Ideal para cortes detallados en vinilos y películas de seguridad.", modelo: "JL537", precio: 10500, categoria: "Corte", destacado: false },
+      { id: 24, titulo: "BISTURÍ TAJIMA EC 303",                                descripcion: "Instrumento de corte de precisión japonesa con cuerpo ergonómico. Ideal para cortes detallados en vinilos y películas de seguridad.", modelo: "JL537", precio: 10500, categoria: "Corte", destacado: true },
       { id: 25, titulo: "BISTURÍ TAJIMA LC 320",                                descripcion: "Instrumento de corte de precisión japonesa con cuerpo ergonómico. Ideal para cortes detallados en vinilos y películas de seguridad.", modelo: "JL539", precio: 12600, categoria: "Corte", destacado: false },
-      { id: 26, titulo: "HERRAMIENTA MULTIUSOS DE METAL (PPF)",                 descripcion: "Herramienta multiusos de metal para el estirado y presión de la película de protección de pintura (PPF).", modelo: "JL510", precio: 42000, categoria: "Herramientas Polarizado", destacado: false },
+      { id: 26, titulo: "HERRAMIENTA MULTIUSOS DE METAL (PPF)",                 descripcion: "Herramienta multiusos de metal para el estirado y presión de la película de protección de pintura (PPF).", modelo: "JL510", precio: 42000, categoria: "Herramientas Polarizado", destacado: true },
       { id: 27, titulo: "KIT ESPÁTULAS Y PALANCAS WRAP X 6",                    descripcion: "Set profesional para espacios reducidos sin dañar la pintura, ideal para la instalación de vinilos y PPF.", modelo: "JL509", precio: 63000, categoria: "Kits", destacado: true },
       { id: 28, titulo: "CORTADOR DE RODILLO MULTIUSOS",                        descripcion: "Cortador de rodillo para instalación de películas y corte preciso de materiales.", modelo: "JL140", precio: 10500, categoria: "Corte", destacado: false }
     ];
@@ -319,6 +432,7 @@
     // 3) RENDER DE TARJETAS
     // ============================================================
     const grid = document.getElementById("productos");
+    const gridDestacados = document.getElementById("destacados");
     const contador = document.getElementById("result-count");
     const buscador = document.getElementById("buscador");
 
@@ -327,7 +441,7 @@
       card.className = "card flex flex-col relative";
 
       const badge = p.destacado
-        ? `<span class="absolute top-3 right-3 z-10 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-navy text-white shadow-soft">Recomendado</span>`
+        ? `<span class="absolute top-3 right-3 z-10 text-[9px] font-bold uppercase tracking-widest px-2 py-1 rounded-full bg-flame-500 text-white shadow-glow">Recomendado</span>`
         : "";
 
       card.innerHTML = `
@@ -336,15 +450,15 @@
           ${badge}
           <div class="ring"></div>
           ${iconoHerramienta}
-          <span class="absolute bottom-2.5 right-3 z-10 text-[10px] font-bold tracking-widest text-slate-500 uppercase">${p.modelo}</span>
+          <span class="absolute bottom-2.5 right-3 z-10 text-[10px] font-bold tracking-widest text-navy-700 uppercase">${p.modelo}</span>
         </div>
         <div class="p-5 flex flex-col flex-1">
-          <h3 class="font-display font-bold text-navy text-base sm:text-lg leading-snug tracking-tight">${p.titulo}</h3>
+          <h3 class="font-display font-bold text-navy-800 text-base sm:text-lg leading-snug tracking-tight">${p.titulo}</h3>
           <p class="mt-2 text-sm text-slate-500 leading-relaxed flex-1">${p.descripcion}</p>
           <div class="mt-3 flex items-center gap-2">
             <span class="text-[11px] font-bold tracking-widest uppercase text-slate-400 border border-slate-200 rounded-md px-2 py-1 bg-slate-50">Modelo ${p.modelo}</span>
           </div>
-          <p class="mt-4 text-2xl font-display font-extrabold text-brand leading-none">${formatearPrecio(p.precio)}</p>
+          <p class="mt-4 text-2xl font-display font-extrabold text-flame-600 leading-none">${formatearPrecio(p.precio)}</p>
           <p class="text-[10px] text-slate-400 uppercase tracking-widest mt-1 mb-4">Precio COP · IVA incluido</p>
           <button type="button" class="btn-wa">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -381,13 +495,17 @@
         : `${filtradas.length} productos`;
     }
 
+    function renderDestacados() {
+      gridDestacados.innerHTML = "";
+      productos.filter((p) => p.destacado).forEach((p) => gridDestacados.appendChild(crearTarjeta(p)));
+    }
+
     document.querySelectorAll(".chip[data-filter]").forEach((chip) => {
       chip.addEventListener("click", () => {
         document.querySelectorAll(".chip[data-filter]").forEach((c) => c.classList.remove("active"));
         chip.classList.add("active");
         filtroActivo = chip.dataset.filter;
         renderizar();
-        grid.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     });
 
@@ -397,17 +515,91 @@
     });
 
     // ============================================================
-    // 5) BOTÓN GENERAL DE WHATSAPP (CTA final)
+    // 5) NAVEGACIÓN ENTRE VISTAS (Inicio <-> Catálogo)
     // ============================================================
-    document.getElementById("btn-wa-general").href =
-      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-        "Hola Supplies Graphics 👋\n\nQuiero información sobre sus herramientas profesionales para polarizado, detailing y PPF."
-      )}`;
+    const vistaInicio = document.getElementById("vista-inicio");
+    const vistaCatalogo = document.getElementById("vista-catalogo");
+    const navLinks = document.querySelectorAll(".nav-link");
+    const menuMovil = document.getElementById("menu-movil");
+
+    function irAInicio() {
+      vistaInicio.classList.remove("hidden");
+      vistaCatalogo.classList.add("hidden");
+      navLinks.forEach((l) => l.classList.remove("active"));
+      document.querySelectorAll('.nav-link[data-vista="inicio"]').forEach((l) => l.classList.add("active"));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function irACatalogo(categoria) {
+      vistaInicio.classList.add("hidden");
+      vistaCatalogo.classList.remove("hidden");
+      navLinks.forEach((l) => l.classList.remove("active"));
+      document.querySelectorAll('.nav-link[data-vista="catalogo"]').forEach((l) => l.classList.add("active"));
+
+      if (categoria) {
+        filtroActivo = categoria;
+        document.querySelectorAll(".chip[data-filter]").forEach((c) => {
+          c.classList.toggle("active", c.dataset.filter === categoria);
+        });
+      }
+      renderizar();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function irContacto() {
+      irAInicio();
+      setTimeout(() => document.getElementById("contacto").scrollIntoView({ behavior: "smooth" }), 350);
+    }
+
+    document.querySelectorAll(".nav-go").forEach((el) => {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        menuMovil.classList.add("hidden");
+        const vista = el.dataset.vista;
+        const cat = el.dataset.cat;
+        if (vista === "catalogo") irACatalogo(cat);
+        else if (vista === "inicio") irAInicio();
+      });
+    });
+
+    document.querySelectorAll(".nav-contacto").forEach((el) => {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        menuMovil.classList.add("hidden");
+        irContacto();
+      });
+    });
+
+    document.getElementById("btn-menu").addEventListener("click", () => {
+      menuMovil.classList.toggle("hidden");
+    });
+
+    // Navegación por hash (#inicio / #catalogo)
+    function manejarHash() {
+      const h = location.hash;
+      if (h === "#catalogo") irACatalogo();
+      else irAInicio();
+    }
+    window.addEventListener("hashchange", manejarHash);
 
     // ============================================================
-    // 6) INICIO
+    // 6) BOTONES GENERALES DE WHATSAPP
+    // ============================================================
+    const mensajeGeneral = encodeURIComponent(
+      "Hola Supplies Graphics 👋\n\nQuiero información sobre sus herramientas profesionales para polarizado, detailing y PPF."
+    );
+    const urlWa = `https://wa.me/${WHATSAPP_NUMBER}?text=${mensajeGeneral}`;
+    ["wa-header", "wa-header-movil", "wa-hero", "wa-cta", "wa-footer"].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.href = urlWa;
+    });
+
+    // ============================================================
+    // 7) INICIO
     // ============================================================
     renderizar();
+    renderDestacados();
+    manejarHash();
   </script>
 </body>
 </html>
