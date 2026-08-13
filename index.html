@@ -3,8 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Supplies Graphics — Herramientas Profesionales</title>
-  <meta name="description" content="Herramientas profesionales para polarizados, detailing y PPF. Catálogo de herramienta, precios en COP y pedidos por WhatsApp." />
+  <title>Supplies Graphics — Catálogo de Herramienta</title>
+  <meta name="description" content="Herramientas profesionales para polarizados, detailing y PPF. Catálogo de herramienta con precios en COP y pedidos directos por WhatsApp." />
+  <link rel="icon" type="image/jpeg" href="logo.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Supplies Graphics" />
+  <meta property="og:title" content="Supplies Graphics — Catálogo de Herramienta" />
+  <meta property="og:description" content="Herramientas profesionales para polarizados, detailing y PPF. Precios en COP y pedidos directos por WhatsApp." />
+  <meta property="og:image" content="https://herrera11dg.github.io/supplies-graphics-catalog/logo.jpg" />
+  <meta property="og:url" content="https://herrera11dg.github.io/supplies-graphics-catalog/" />
+  <meta name="twitter:card" content="summary" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Supplies Graphics",
+    "description": "Venta de herramientas profesionales para polarizados, detailing y PPF.",
+    "image": "https://herrera11dg.github.io/supplies-graphics-catalog/logo.jpg",
+    "url": "https://herrera11dg.github.io/supplies-graphics-catalog/",
+    "telephone": "+573108787928",
+    "priceRange": "COP",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bogotá",
+      "addressCountry": "CO"
+    }
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -259,6 +284,18 @@
 
     /* ===== enlace de texto en footer ===== */
     .legal-link:hover { color: #f97316; }
+
+    /* ===== selector de color (variantes de producto) ===== */
+    .chip-color {
+      width: 24px; height: 24px; border-radius: 9999px;
+      background: var(--c, #000);
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1.5px #e2e8f0;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .chip-color:hover { transform: scale(1.12); }
+    .chip-color.activo { box-shadow: 0 0 0 2px #f97316; }
   </style>
 </head>
 
@@ -284,7 +321,7 @@
         <a href="#contacto" data-vista="inicio" data-ancla="contacto" class="nav-link nav-contacto">Contacto</a>
         <a id="wa-header" href="#" target="_blank" class="btn-flame !py-2 !px-5 !text-xs ml-2">WhatsApp</a>
       </nav>
-      <button id="btn-menu" class="lg:hidden p-2 rounded-lg border border-white/20 text-white">
+      <button id="btn-menu" class="lg:hidden p-2 rounded-lg border border-white/20 text-white" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
     </div>
@@ -446,12 +483,13 @@
         <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-3">
           <div id="filtros" class="flex gap-2 overflow-x-auto pb-1 flex-1">
             <button class="chip active" data-filter="todos">Todos</button>
+            <button class="chip" data-filter="Herramientas Polarizado">Herramientas Polarizado</button>
             <button class="chip" data-filter="Limpieza">Limpieza</button>
             <button class="chip" data-filter="Corte">Corte</button>
-            <button class="chip" data-filter="Herramientas Polarizado">Herramientas Polarizado</button>
             <button class="chip" data-filter="Kits">Kits</button>
           </div>
           <div class="relative lg:w-72">
+            <label for="buscador" class="sr-only">Buscar producto o modelo</label>
             <input id="buscador" type="text" placeholder="Buscar producto o modelo..."
                    class="w-full pl-10 pr-4 py-2.5 text-sm rounded-full border border-white/20 bg-white/10 text-white placeholder-blue-200/70 focus:outline-none focus:ring-2 focus:ring-flame-500 focus:border-flame-500" />
             <svg class="w-4 h-4 text-blue-300 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path stroke-linecap="round" d="m21 21-4.3-4.3"></path></svg>
@@ -664,8 +702,7 @@
     const productos = [
       { id: 1,  titulo: "RASPADOR DE VIDRIO MANGO LARGO",                       descripcion: "Herramienta de largo alcance para remoción de adhesivos, residuos y material sobrante en superficies de vidrio.", modelo: "JL358", precio: 17500, categoria: "Limpieza", destacado: true },
       { id: 2,  titulo: "RASPADOR ALUMINIO MANGO LARGO (CORTE)",                descripcion: "Raspador de aluminio con mango largo (BLUEMAX 25,5 x 13 cm) para corte y remoción de material adhesivo.", modelo: "JL350", precio: 42000, categoria: "Limpieza", destacado: false },
-      { id: 3,  titulo: "RASPADOR RANURADO AZUL",                               descripcion: "Raspador ergonómico ranurado azul, ideal para trabajo de limpieza y corte de precisión.", modelo: "JL353", precio: 24500, categoria: "Limpieza", destacado: false },
-      { id: 4,  titulo: "RASPADOR RANURADO ROJO",                               descripcion: "Raspador ergonómico ranurado rojo, ideal para trabajo de limpieza y corte de precisión.", modelo: "JL353", precio: 24500, categoria: "Limpieza", destacado: false },
+      { id: 3,  titulo: "RASPADOR RANURADO",                                   descripcion: "Raspador ergonómico ranurado, ideal para trabajo de limpieza y corte de precisión.", modelo: "JL353", precio: 24500, categoria: "Limpieza", destacado: false, colores: [{ n: "Azul", h: "#2563eb" }, { n: "Rojo", h: "#dc2626" }] },
       { id: 5,  titulo: "RASPADOR DE SILICONA MANGO PLÁSTICO",                  descripcion: "Espátula de silicona de alta flexibilidad ideal para el moldeado de películas y succión de agua sin dañar el material.", modelo: "JL511", precio: 14000, categoria: "Herramientas Polarizado", destacado: false },
       { id: 6,  titulo: "LIMPIADOR DE SILICONA SUAVE",                          descripcion: "Escurridor de alto rendimiento para eliminar agua en superficies planas. Su hoja de silicona deja libre de vetas y rayaduras.", modelo: "JL373", precio: 14000, categoria: "Limpieza", destacado: false },
       { id: 7,  titulo: "RASPADOR MULTIUSOS ROJO",                              descripcion: "Raspador multiusos con mango ergonómico, ideal para preparar y limpiar áreas antes de la instalación de películas.", modelo: "JL508", precio: 17500, categoria: "Herramientas Polarizado", destacado: false },
@@ -680,8 +717,7 @@
       { id: 16, titulo: "ESPÁTULA CON IMÁN 3M",                                 descripcion: "Herramienta con imán integrado que facilita el posicionamiento de materiales durante la instalación.", modelo: "JL150", precio: 5600, categoria: "Herramientas Polarizado", destacado: false },
       { id: 17, titulo: "CUCHILLA DE MANO CORTA PARA PELÍCULA",                 descripcion: "Cortador de seguridad diseñado para realizar cortes precisos sin exponer la hoja.", modelo: "JL142", precio: 10500, categoria: "Corte", destacado: false },
       { id: 18, titulo: "RASPADOR MULTIÁNGULO",                                 descripcion: "Espátula flexible de múltiples ángulos que se adapta a las curvaturas de la superficie.", modelo: "JL151", precio: 4900, categoria: "Herramientas Polarizado", destacado: false },
-      { id: 19, titulo: "REPUESTOS PARA RASPADOR DE SILICONA ROJO",             descripcion: "Hojas de reemplazo de alta resistencia para mantener la superficie libre de daños.", modelo: "JL423", precio: 7000, categoria: "Limpieza", destacado: false },
-      { id: 20, titulo: "REPUESTOS PARA RASPADOR DE SILICONA VERDE",            descripcion: "Hojas de reemplazo de alta resistencia para mantener la superficie libre de daños.", modelo: "JL423", precio: 7000, categoria: "Limpieza", destacado: false },
+      { id: 19, titulo: "REPUESTOS PARA RASPADOR DE SILICONA",                 descripcion: "Hojas de reemplazo de alta resistencia para mantener la superficie libre de daños.", modelo: "JL423", precio: 7000, categoria: "Limpieza", destacado: false, colores: [{ n: "Rojo", h: "#dc2626" }, { n: "Verde", h: "#16a34a" }] },
       { id: 21, titulo: "REPUESTO CUCHILLA DE GOMA NEGRA",                      descripcion: "Repuesto de cuchilla en goma para escurridor, ideal para el trabajo limpio sobre películas y vinilos.", modelo: "JL534", precio: 17500, categoria: "Limpieza", destacado: false },
       { id: 22, titulo: "KIT DE HERRAMIENTAS ESPECIAL PARA PELÍCULAS",          descripcion: "Set integral con los elementos esenciales para medir, cortar y ajustar películas protectoras. Instalación profesional de principio a fin.", modelo: "JL530", precio: 17500, categoria: "Kits", destacado: true },
       { id: 23, titulo: "BISTURÍ UTILITARIO LANZA 9MM",                         descripcion: "Cuchilla de seguridad para corte de precisión y trabajo manual de materiales.", modelo: "JL532", precio: 10500, categoria: "Corte", destacado: false },
@@ -698,15 +734,44 @@
     const formatearPrecio = (n) =>
       new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 }).format(n);
 
-    const mensajeWhatsApp = (titulo, modelo) =>
+    const mensajeWhatsApp = (titulo, modelo, color) =>
       encodeURIComponent(
-        `Hola Supplies Graphics 👋\n\nQuiero pedir este producto:\n\n🛠️ *${titulo}*\n🔖 Modelo: *${modelo}*\n\n¿Está disponible?`
+        `Hola Supplies Graphics 👋\n\nQuiero pedir este producto:\n\n🛠️ *${titulo}*${color ? `\n🎨 Color: *${color}*` : ""}\n🔖 Modelo: *${modelo}*\n\n¿Está disponible?`
       );
 
-    const abrirWhatsApp = (titulo, modelo) =>
-      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${mensajeWhatsApp(titulo, modelo)}`, "_blank");
+    const abrirWhatsApp = (titulo, modelo, color) =>
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${mensajeWhatsApp(titulo, modelo, color)}`, "_blank");
 
-    const iconoHerramienta = `
+    // ============================================================
+    // ÍCONO POR CATEGORÍA (placeholder hasta tener fotos reales)
+    // ============================================================
+    const iconosCategoria = {
+      "Limpieza": `
+        <svg class="tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 18c3-1 4-3 5-4l9-9c1-1 3-1 4 0 1 1 1 3 0 4l-9 9c-1 1-3 2-4 5"/>
+          <path d="M11 12l4-4"/>
+          <path d="M15 21h6"/>
+          <path d="M17 21v-3"/>
+        </svg>`,
+      "Corte": `
+        <svg class="tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 21c0-6 4-10 10-13 3-1 5-1 8-1-1 3-2 6-4 8-4 3-8 5-14 6z"/>
+          <path d="M13 8l6-3"/>
+          <path d="M15 6l1 1"/>
+        </svg>`,
+      "Herramientas Polarizado": `
+        <svg class="tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 16a7 7 0 0 1 10-2l3 3-4 4-3-3a7 7 0 0 1-6-2z"/>
+          <path d="M12 14l3-3"/>
+        </svg>`,
+      "Kits": `
+        <svg class="tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2.5" y="7.5" width="19" height="13" rx="2"/>
+          <path d="M2.5 12h19"/>
+          <path d="M9 7.5V5.5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5.5v2"/>
+        </svg>`,
+    };
+    const iconoPorCategoria = (cat) => iconosCategoria[cat] || `
       <svg class="tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
         <path d="M14.7 6.3a4.5 4.5 0 0 0-6.1 6.1L3 18l3 3 5.6-5.6a4.5 4.5 0 0 0 6.1-6.1l-3 3-2.1-2.1 3-3z"/>
         <path d="m14.7 6.3 3.6-3.6 2.8 2.8-3.6 3.6"/>
@@ -728,12 +793,18 @@
       const badgeTop = p.destacado
         ? `<span class="badge-top">★ Recomendado</span>` : "";
 
+      const chipsColor = p.colores
+        ? `<div class="mt-4 flex items-center gap-2.5">
+            <span class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Color</span>
+            ${p.colores.map((c, i) => `<button type="button" class="chip-color${i === 0 ? " activo" : ""}" style="--c:${c.h}" title="${c.n}" aria-label="Color ${c.n}" aria-pressed="${i === 0}"></button>`).join("")}
+          </div>` : "";
+
       card.innerHTML = `
         <div class="thumb g-${p.categoria.replace(/ /g, "-")}">
           <span class="badge-cat">${p.categoria}</span>
           ${badgeTop}
           <div class="ring"></div>
-          ${iconoHerramienta}
+          ${iconoPorCategoria(p.categoria)}
           <span class="spec-model">REF ${p.modelo}</span>
         </div>
         <div class="p-5 sm:p-6 flex flex-col flex-1">
@@ -746,16 +817,34 @@
             </div>
             <span class="text-[10px] font-bold tracking-widest uppercase text-slate-400 border border-slate-200 rounded-md px-2 py-1 bg-slate-50 whitespace-nowrap">${p.modelo}</span>
           </div>
+          ${chipsColor}
           <button type="button" class="btn-wa mt-4">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
             Pedir por WhatsApp
           </button>
+          <p class="mt-2.5 text-[11px] text-slate-400 flex items-center justify-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Respondemos en minutos
+          </p>
         </div>
       `;
 
-      card.querySelector(".btn-wa").addEventListener("click", () => abrirWhatsApp(p.titulo, p.modelo));
+      let colorSel = null;
+      if (p.colores) {
+        colorSel = p.colores[0];
+        card.querySelectorAll(".chip-color").forEach((btn, i) => {
+          btn.addEventListener("click", () => {
+            card.querySelectorAll(".chip-color").forEach((b, j) => {
+              b.classList.toggle("activo", j === i);
+              b.setAttribute("aria-pressed", j === i ? "true" : "false");
+            });
+            colorSel = p.colores[i];
+          });
+        });
+      }
+
+      card.querySelector(".btn-wa").addEventListener("click", () => abrirWhatsApp(p.titulo, p.modelo, colorSel ? colorSel.n : null));
       return card;
     }
 
@@ -874,8 +963,11 @@
       });
     });
 
-    document.getElementById("btn-menu").addEventListener("click", () => {
-      menuMovil.classList.toggle("hidden");
+    const btnMenu = document.getElementById("btn-menu");
+    btnMenu.addEventListener("click", () => {
+      const abierto = menuMovil.classList.toggle("hidden") === false;
+      btnMenu.setAttribute("aria-expanded", abierto ? "true" : "false");
+      btnMenu.setAttribute("aria-label", abierto ? "Cerrar menú" : "Abrir menú");
     });
 
     // ============================================================
