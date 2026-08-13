@@ -3,176 +3,274 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Supplies Graphics — Catálogo de Herramienta</title>
+  <title>Supplies Graphics — Herramientas Profesionales</title>
   <meta name="description" content="Herramientas profesionales para polarizados, detailing y PPF. Catálogo de herramienta, precios en COP y pedidos por WhatsApp." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            navy: { 900:'#081a3c', 800:'#0d2550', 700:'#123064', 600:'#1a428a', 500:'#2563eb', 400:'#60a5fa', 100:'#dbeafe' },
+            navy: { 950:'#050f26', 900:'#081a3c', 800:'#0d2550', 700:'#123064', 600:'#1a428a', 500:'#2563eb', 400:'#60a5fa', 200:'#bfdbfe' },
             flame: { 600:'#ea580c', 500:'#f97316', 400:'#fb923c' },
             whatsapp: '#25D366',
           },
           fontFamily: {
-            display: ['"Segoe UI"', 'Arial', 'sans-serif'],
+            display: ['Archivo', 'Segoe UI', 'sans-serif'],
+            body: ['Inter', 'Segoe UI', 'sans-serif'],
           },
           boxShadow: {
-            soft: '0 10px 30px rgba(8,26,60,.25)',
-            lift: '0 16px 40px rgba(8,26,60,.35)',
-            glow: '0 0 0 1px rgba(249,115,22,.4), 0 10px 30px rgba(249,115,22,.25)',
+            soft: '0 12px 32px rgba(5,15,38,.35)',
+            lift: '0 24px 60px rgba(5,15,38,.5)',
+            glow: '0 10px 34px rgba(249,115,22,.4)',
+            glowBlue: '0 10px 34px rgba(37,99,235,.35)',
           },
         }
       }
     }
 
-    body { font-family: 'Segoe UI', Arial, sans-serif; }
+    body { font-family: 'Inter', 'Segoe UI', sans-serif; }
     ::selection { background: #f97316; color: #fff; }
 
-    ::-webkit-scrollbar { width: 10px; }
-    ::-webkit-scrollbar-track { background: #0d2550; }
+    ::-webkit-scrollbar { width: 11px; }
+    ::-webkit-scrollbar-track { background: #081a3c; }
     ::-webkit-scrollbar-thumb { background: #1a428a; border-radius: 8px; }
     ::-webkit-scrollbar-thumb:hover { background: #f97316; }
 
-    /* ---------- Fondo de la página ---------- */
+    /* ===== fondo app ===== */
     .app-bg {
       background:
-        radial-gradient(ellipse at 15% 0%, rgba(37,99,235,.25), transparent 50%),
-        radial-gradient(ellipse at 90% 100%, rgba(249,115,22,.12), transparent 45%),
-        linear-gradient(180deg, #081a3c 0%, #0d2550 60%, #081a3c 100%);
+        radial-gradient(ellipse 900px 500px at 12% -5%, rgba(37,99,235,.28), transparent 60%),
+        radial-gradient(ellipse 700px 500px at 95% 30%, rgba(249,115,22,.12), transparent 55%),
+        linear-gradient(180deg, #050f26 0%, #081a3c 55%, #050f26 100%);
     }
-
     .grid-pattern {
       background-image:
-        linear-gradient(rgba(96,165,250,.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(96,165,250,.06) 1px, transparent 1px);
-      background-size: 34px 34px;
+        linear-gradient(rgba(96,165,250,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(96,165,250,.05) 1px, transparent 1px);
+      background-size: 38px 38px;
+    }
+    .noise {
+      background-image: radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 4px 4px;
     }
 
-    /* ---------- Cards de producto ---------- */
+    /* ===== barra de progreso de scroll ===== */
+    #scroll-progress {
+      position: fixed; top: 0; left: 0; height: 3px; z-index: 100;
+      background: linear-gradient(90deg, #2563eb, #f97316);
+      width: 0%;
+    }
+
+    /* ===== hero shine ===== */
+    .shine-text {
+      background-image: linear-gradient(110deg, #fbbf24 10%, #f97316 35%, #ffd9a8 50%, #f97316 65%, #fb923c 90%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 6s linear infinite;
+    }
+    @keyframes shine { to { background-position: 200% center; } }
+
+    .hero-glow {
+      position: absolute; width: 420px; height: 420px; border-radius: 9999px;
+      background: radial-gradient(circle, rgba(37,99,235,.35), transparent 65%);
+      filter: blur(30px);
+    }
+
+    /* ===== reveal on scroll ===== */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ===== cards ===== */
     .card {
       background: #fff;
-      border-radius: 1rem;
+      border-radius: 1.1rem;
       overflow: hidden;
-      transition: transform .25s, box-shadow .25s;
-      animation: rise .5s ease both;
+      transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s, border-color .3s;
+      border: 1px solid rgba(255,255,255,0);
     }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 18px 42px rgba(8,26,60,.45); }
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    .card:hover { transform: translateY(-7px); box-shadow: 0 26px 60px rgba(5,15,38,.55); }
 
     .thumb {
       position: relative;
       aspect-ratio: 16 / 11;
-      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 55%, #c7d2fe 100%);
-      display: grid;
-      place-items: center;
       overflow: hidden;
+      display: grid; place-items: center;
     }
-    .thumb .tool { width: 38%; color: #2563eb; filter: drop-shadow(0 6px 10px rgba(37,99,235,.3)); }
+    .thumb .tool { width: 36%; color: #fff; filter: drop-shadow(0 8px 14px rgba(5,15,38,.35)); }
+    .thumb .spec-model {
+      position: absolute; left: .8rem; bottom: .7rem; z-index: 5;
+      font-family: 'Archivo'; font-weight: 900; letter-spacing: .08em;
+      font-size: .72rem; color: rgba(255,255,255,.95);
+      padding: .28rem .6rem; border-radius: .5rem;
+      background: rgba(5,15,38,.55); backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,.18);
+    }
     .thumb .ring {
-      position: absolute; inset: 8%;
-      border: 1.5px dashed rgba(37,99,235,.35); border-radius: 1rem;
+      position: absolute; inset: 7%;
+      border: 1.5px dashed rgba(255,255,255,.4); border-radius: 1rem;
     }
-
-    /* ---------- Chips de filtro ---------- */
-    .chip {
-      border: 1px solid rgba(96,165,250,.4);
-      background: rgba(255,255,255,.06);
-      color: #bfdbfe;
-      padding: .5rem 1.05rem;
-      border-radius: 9999px;
-      font-size: .78rem;
-      font-weight: 700;
-      letter-spacing: .03em;
-      transition: all .2s;
-      white-space: nowrap;
-      cursor: pointer;
-    }
-    .chip:hover { border-color: #f97316; color: #fff; background: rgba(249,115,22,.15); }
-    .chip.active { background: #f97316; border-color: #f97316; color: #fff; box-shadow: 0 6px 18px rgba(249,115,22,.4); }
-
-    /* ---------- Botones ---------- */
-    .btn-wa {
-      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-      width: 100%; padding: .78rem 1rem; border-radius: .8rem;
-      font-weight: 700; font-size: .9rem; color: #fff;
-      background: linear-gradient(135deg, #25D366, #128C7E);
-      transition: transform .15s, box-shadow .2s, filter .2s;
-    }
-    .btn-wa:hover { filter: brightness(1.08); box-shadow: 0 10px 24px rgba(37,211,102,.4); }
-    .btn-wa:active { transform: scale(.97); }
-
-    .btn-flame {
-      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-      padding: .8rem 1.6rem; border-radius: .9rem;
-      font-weight: 800; font-size: .9rem; text-transform: uppercase; letter-spacing: .05em;
-      color: #fff; background: linear-gradient(135deg, #f97316, #ea580c);
-      transition: transform .15s, box-shadow .2s, filter .2s;
-    }
-    .btn-flame:hover { filter: brightness(1.08); box-shadow: 0 10px 26px rgba(249,115,22,.4); }
-    .btn-flame:active { transform: scale(.97); }
 
     .badge-cat {
-      position: absolute; top: .7rem; left: .7rem; z-index: 5;
-      font-size: .6rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-      padding: .3rem .65rem; border-radius: 9999px;
-      background: rgba(13,37,80,.85); color: #fbbf24; border: 1px solid rgba(251,191,36,.4);
+      position: absolute; top: .75rem; left: .75rem; z-index: 6;
+      font-family: 'Archivo'; font-size: .6rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      padding: .32rem .68rem; border-radius: 9999px;
+      background: rgba(5,15,38,.6); backdrop-filter: blur(4px);
+      color: #fcd34d; border: 1px solid rgba(252,211,77,.4);
+    }
+    .badge-top {
+      position: absolute; top: .75rem; right: .75rem; z-index: 6;
+      font-family: 'Archivo'; font-size: .6rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+      padding: .32rem .68rem; border-radius: 9999px;
+      background: linear-gradient(135deg, #f97316, #ea580c); color: #fff;
+      box-shadow: 0 6px 18px rgba(249,115,22,.45);
     }
 
-    /* ---------- Categorías ---------- */
+    /* gradientes por categoría */
+    .g-Limpieza { background: linear-gradient(135deg, #1a428a 0%, #2563eb 55%, #3b82f6 100%); }
+    .g-Corte { background: linear-gradient(135deg, #7c2d12 0%, #ea580c 60%, #f97316 100%); }
+    .g-Herramientas-Polarizado { background: linear-gradient(135deg, #0e3a5c 0%, #0ea5e9 60%, #38bdf8 100%); }
+    .g-Kits { background: linear-gradient(135deg, #43105e 0%, #9333ea 55%, #c084fc 100%); }
+
+    /* ===== chips filtro ===== */
+    .chip {
+      border: 1px solid rgba(96,165,250,.35);
+      background: rgba(255,255,255,.05);
+      color: #bfdbfe;
+      padding: .52rem 1.1rem;
+      border-radius: 9999px;
+      font-family: 'Archivo'; font-weight: 700; font-size: .76rem; letter-spacing: .04em;
+      transition: all .22s;
+      white-space: nowrap; cursor: pointer;
+    }
+    .chip:hover { border-color: #f97316; color: #fff; background: rgba(249,115,22,.15); transform: translateY(-1px); }
+    .chip.active { background: linear-gradient(135deg,#f97316,#ea580c); border-color: transparent; color: #fff; box-shadow: 0 8px 22px rgba(249,115,22,.45); }
+
+    /* ===== botones ===== */
+    .btn-wa {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      width: 100%; padding: .8rem 1rem; border-radius: .85rem;
+      font-family: 'Archivo'; font-weight: 700; font-size: .9rem; color: #fff;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      transition: transform .18s, box-shadow .25s, filter .2s;
+    }
+    .btn-wa:hover { filter: brightness(1.1); box-shadow: 0 12px 30px rgba(37,211,102,.45); transform: translateY(-1px); }
+    .btn-wa:active { transform: scale(.96); }
+
+    .btn-flame {
+      display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
+      padding: .85rem 1.7rem; border-radius: .95rem;
+      font-family: 'Archivo'; font-weight: 800; font-size: .88rem; text-transform: uppercase; letter-spacing: .06em;
+      color: #fff;
+      background: linear-gradient(135deg, #f97316, #ea580c);
+      box-shadow: 0 10px 28px rgba(249,115,22,.35);
+      transition: transform .18s, box-shadow .25s, filter .2s;
+    }
+    .btn-flame:hover { filter: brightness(1.08); box-shadow: 0 14px 36px rgba(249,115,22,.5); transform: translateY(-2px); }
+    .btn-flame:active { transform: scale(.96); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
+      padding: .85rem 1.7rem; border-radius: .95rem;
+      font-family: 'Archivo'; font-weight: 800; font-size: .88rem; text-transform: uppercase; letter-spacing: .06em;
+      color: #fff; border: 1.5px solid rgba(96,165,250,.5); background: rgba(255,255,255,.05);
+      backdrop-filter: blur(4px);
+      transition: all .2s;
+    }
+    .btn-ghost:hover { border-color: #f97316; color: #fcd34d; background: rgba(249,115,22,.12); transform: translateY(-2px); }
+
+    /* ===== nav ===== */
+    .nav-link { position: relative; color: #bfdbfe; font-weight: 600; font-size: .9rem; padding: .45rem .8rem; border-radius: .55rem; transition: color .2s, background .2s; }
+    .nav-link:hover { color: #fff; background: rgba(96,165,250,.14); }
+    .nav-link.active { color: #fff; background: #f97316; }
+
+    /* ===== categorías ===== */
     .cat-card {
-      background: linear-gradient(160deg, rgba(26,66,138,.55), rgba(13,37,80,.7));
-      border: 1px solid rgba(96,165,250,.25);
-      border-radius: 1rem;
-      transition: transform .25s, border-color .25s, background .25s;
+      position: relative;
+      border-radius: 1.2rem; overflow: hidden;
+      background: linear-gradient(160deg, rgba(26,66,138,.5), rgba(13,37,80,.8));
+      border: 1px solid rgba(96,165,250,.22);
+      transition: transform .3s cubic-bezier(.22,1,.36,1), border-color .3s, background .3s;
       cursor: pointer;
     }
-    .cat-card:hover { transform: translateY(-4px); border-color: #f97316; background: linear-gradient(160deg, rgba(26,66,138,.75), rgba(13,37,80,.9)); }
+    .cat-card:hover { transform: translateY(-6px); border-color: rgba(249,115,22,.7); }
+    .cat-card .cat-icon {
+      width: 60px; height: 60px; border-radius: 1.1rem; margin: 0 auto 1rem;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
+      display: grid; place-items: center; color: #fbbf24;
+      transition: background .3s, transform .3s, color .3s;
+    }
+    .cat-card:hover .cat-icon { background: #f97316; color: #fff; transform: scale(1.06) rotate(-4deg); }
+    .cat-card .cat-count {
+      display: inline-block; font-family: 'Archivo'; font-size: .64rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      padding: .25rem .6rem; border-radius: 9999px; margin-top: .55rem;
+      background: rgba(96,165,250,.18); color: #93c5fd; border: 1px solid rgba(96,165,250,.3);
+    }
 
-    /* ---------- Transición entre vistas ---------- */
-    .view { animation: fadeIn .45s ease both; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    /* ===== botón flotante ===== */
+    .wa-float {
+      position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 90;
+      width: 60px; height: 60px; border-radius: 9999px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      display: grid; place-items: center; color: #fff;
+      box-shadow: 0 14px 34px rgba(37,211,102,.5);
+      transition: transform .2s;
+    }
+    .wa-float:hover { transform: scale(1.08); }
+    .wa-float::before {
+      content: ''; position: absolute; inset: 0; border-radius: 9999px;
+      border: 3px solid rgba(37,211,102,.55);
+      animation: pulse-ring 2s ease-out infinite;
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(1.7); opacity: 0; }
+    }
 
-    /* ---------- Nav ---------- */
-    .nav-link { color: #bfdbfe; font-weight: 600; font-size: .9rem; padding: .4rem .75rem; border-radius: .5rem; transition: color .2s, background .2s; }
-    .nav-link:hover { color: #fff; background: rgba(96,165,250,.15); }
-    .nav-link.active { color: #fff; background: #f97316; }
+    /* ===== featured card (revista) ===== */
+    .featured .thumb { aspect-ratio: 16 / 8; }
+    @media (min-width:1024px) { .featured .thumb { aspect-ratio: 16 / 9; } }
+
+    .num-stat { font-family:'Archivo'; font-weight:900; }
   </style>
 </head>
 
-<body class="app-bg text-white antialiased min-h-screen">
-  <div class="fixed inset-0 grid-pattern pointer-events-none opacity-40"></div>
+<body class="app-bg text-white antialiased min-h-screen font-body">
+  <div class="fixed inset-0 grid-pattern pointer-events-none opacity-50"></div>
+  <div class="fixed inset-0 noise pointer-events-none"></div>
+  <div id="scroll-progress"></div>
 
   <!-- ================= HEADER ================= -->
-  <header class="sticky top-0 z-50 bg-navy-900/85 backdrop-blur-md border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
-      <a href="#inicio" data-vista="inicio" class="nav-go flex items-center gap-3">
-        <img src="logo.jpg" alt="Logo Supplies Graphics" class="w-10 h-10 rounded-full object-cover border-2 border-flame-500" />
+  <header id="header" class="sticky top-0 z-50 bg-navy-950/80 backdrop-blur-xl border-b border-white/10 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-3">
+      <a href="#inicio" data-vista="inicio" class="nav-go flex items-center gap-3 group">
+        <img src="logo.jpg" alt="Logo Supplies Graphics"
+             class="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-flame-500 shadow-glow group-hover:scale-105 transition-transform" />
         <div class="leading-tight">
-          <p class="font-display font-extrabold text-white text-base sm:text-lg tracking-wide">SUPPLIES <span class="text-flame-500">GRAPHICS</span></p>
-          <p class="text-[9px] sm:text-[10px] text-blue-200 tracking-[.25em] uppercase">Polarizado · Detailing · PPF</p>
+          <p class="font-display font-extrabold text-white text-lg sm:text-xl tracking-wide">SUPPLIES <span class="text-flame-500">GRAPHICS</span></p>
+          <p class="text-[9px] sm:text-[10px] text-blue-200 tracking-[.28em] uppercase">Polarizado · Detailing · PPF</p>
         </div>
       </a>
-      <nav class="hidden md:flex items-center gap-1">
+      <nav class="hidden lg:flex items-center gap-1">
         <a href="#inicio" data-vista="inicio" class="nav-link active">Inicio</a>
         <a href="#catalogo" data-vista="catalogo" class="nav-link">Catálogo Herramienta</a>
         <a href="#contacto" data-vista="inicio" data-ancla="contacto" class="nav-link nav-contacto">Contacto</a>
-        <a href="#" class="btn-flame !py-2 !px-4 !text-xs ml-2" id="wa-header">Pedir por WhatsApp</a>
+        <a id="wa-header" href="#" target="_blank" class="btn-flame !py-2 !px-5 !text-xs ml-2">WhatsApp</a>
       </nav>
-      <button id="btn-menu" class="md:hidden p-2 rounded-lg border border-white/20 text-white">
+      <button id="btn-menu" class="lg:hidden p-2 rounded-lg border border-white/20 text-white">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
     </div>
-    <!-- menú móvil -->
-    <div id="menu-movil" class="hidden md:hidden border-t border-white/10 bg-navy-900/95 px-4 py-3 flex flex-col gap-1">
+    <div id="menu-movil" class="hidden lg:hidden border-t border-white/10 bg-navy-950/95 px-4 py-3 flex flex-col gap-1">
       <a href="#inicio" data-vista="inicio" class="nav-link nav-go">Inicio</a>
       <a href="#catalogo" data-vista="catalogo" class="nav-link nav-go">Catálogo Herramienta</a>
       <a href="#contacto" data-vista="inicio" data-ancla="contacto" class="nav-link nav-contacto">Contacto</a>
-      <a href="#" class="btn-flame !py-2.5 !text-xs mt-1" id="wa-header-movil">Pedir por WhatsApp</a>
+      <a id="wa-header-movil" href="#" target="_blank" class="btn-flame !py-2.5 !text-xs mt-1">Pedir por WhatsApp</a>
     </div>
   </header>
 
@@ -181,110 +279,159 @@
   ======================================================== -->
   <div id="vista-inicio" class="view relative z-10">
 
-    <!-- HERO -->
+    <!-- ============ HERO SHOWROOM ============ -->
     <section class="relative overflow-hidden">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-14 sm:pt-24 sm:pb-20 text-center relative z-10">
-        <span class="inline-flex items-center gap-2 text-[10px] sm:text-xs font-bold tracking-[.25em] uppercase text-amber-300 bg-white/5 border border-amber-300/40 rounded-full px-4 py-1.5 mb-6">
-          <span class="w-2 h-2 rounded-full bg-whatsapp"></span>
-          Bogotá, Colombia · Envíos nacionales
-        </span>
-        <h1 class="font-display font-extrabold text-white text-4xl sm:text-6xl lg:text-7xl leading-[1.05] tracking-tight">
-          Todo en un solo lugar<br class="hidden sm:block" />
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-flame-500 to-orange-400">para tu taller</span>
-        </h1>
-        <p class="mt-6 max-w-2xl mx-auto text-blue-200 text-sm sm:text-lg leading-relaxed">
-          Herramientas profesionales para <strong class="text-white">polarizados</strong>, <strong class="text-white">detailing</strong> y <strong class="text-white">PPF</strong>.
-          Calidad industrial, precios en pesos colombianos y atención directa.
-        </p>
-        <div class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a href="#catalogo" data-vista="catalogo" class="btn-flame nav-go w-full sm:w-auto">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
-            Ver Catálogo Herramienta
-          </a>
-          <a id="wa-hero" href="#" target="_blank" class="btn-wa !w-auto px-6">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Cotizar por WhatsApp
-          </a>
-        </div>
-        <div class="mt-10 flex flex-wrap items-center justify-center gap-3 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-blue-200">
-          <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10">+ 30 Referencias</span>
-          <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10">Envío a toda Colombia</span>
-          <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10">Pedidos por WhatsApp</span>
+      <div class="hero-glow" style="top:-80px;left:-60px;"></div>
+      <div class="hero-glow" style="bottom:-140px;right:-80px;background:radial-gradient(circle, rgba(249,115,22,.22), transparent 65%);"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-14 pb-16 sm:pt-20 sm:pb-24 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+          <!-- Texto -->
+          <div class="text-center lg:text-left reveal visible">
+            <img src="logo.jpg" alt="Supplies Graphics"
+                 class="w-24 h-24 sm:w-28 sm:h-28 mx-auto lg:mx-0 rounded-full object-cover border-4 border-flame-500 shadow-glow mb-7" />
+            <span class="inline-flex items-center gap-2 text-[10px] sm:text-xs font-bold tracking-[.25em] uppercase text-amber-300 bg-white/5 border border-amber-300/30 rounded-full px-4 py-1.5 mb-5">
+              <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-whatsapp opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-whatsapp"></span></span>
+              Atención directa · Bogotá
+            </span>
+            <h1 class="font-display font-black text-white text-4xl sm:text-6xl xl:text-7xl leading-[1.02] tracking-tight">
+              Equipa tu taller<br class="hidden sm:block" />
+              <span class="shine-text">como un pro.</span>
+            </h1>
+            <p class="mt-6 max-w-lg mx-auto lg:mx-0 text-blue-200 text-sm sm:text-lg leading-relaxed">
+              Herramientas de precisión para <strong class="text-white">polarizado</strong>, <strong class="text-white">detailing</strong> y <strong class="text-white">PPF</strong>.
+              Referencias originales, precios justos y asesoría que sí responde.
+            </p>
+            <div class="mt-9 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
+              <a href="#catalogo" data-vista="catalogo" class="btn-flame w-full sm:w-auto nav-go">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18l-6 8v6l-6 2v-8L3 4z"/></svg>
+                Ver catálogo
+              </a>
+              <a id="wa-hero" href="#" target="_blank" class="btn-ghost w-full sm:w-auto">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Cotizar
+              </a>
+            </div>
+          </div>
+
+          <!-- "Ficha técnica" estilo showroom -->
+          <div class="hidden lg:block reveal visible">
+            <div class="relative rounded-3xl border border-white/12 bg-gradient-to-br from-navy-800/80 to-navy-950/80 backdrop-blur-md p-8 shadow-lift overflow-hidden">
+              <div class="absolute top-0 right-0 w-40 h-40 bg-flame-500/10 rounded-full blur-2xl"></div>
+              <div class="flex items-center justify-between mb-7">
+                <p class="font-display font-bold text-white text-lg tracking-wide">SUPPLIES <span class="text-flame-500">GRAPHICS</span></p>
+                <span class="font-display text-[10px] font-bold tracking-[.2em] uppercase text-amber-300 border border-amber-300/30 rounded-full px-3 py-1">2026</span>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="rounded-2xl bg-white/5 border border-white/10 p-5 text-center">
+                  <p class="num-stat text-3xl sm:text-4xl text-white" data-contar="28">0</p>
+                  <p class="text-[10px] uppercase tracking-[.2em] text-blue-200 mt-1">Referencias</p>
+                </div>
+                <div class="rounded-2xl bg-white/5 border border-white/10 p-5 text-center">
+                  <p class="num-stat text-3xl sm:text-4xl text-white" data-contar="4">0</p>
+                  <p class="text-[10px] uppercase tracking-[.2em] text-blue-200 mt-1">Categorías</p>
+                </div>
+                <div class="rounded-2xl bg-white/5 border border-white/10 p-5 text-center">
+                  <p class="num-stat text-3xl sm:text-4xl text-white" data-contar="100">0</p>
+                  <p class="text-[10px] uppercase tracking-[.2em] text-blue-200 mt-1">% Envíos nacionales</p>
+                </div>
+                <div class="rounded-2xl bg-white/5 border border-white/10 p-5 text-center">
+                  <p class="num-stat text-3xl sm:text-4xl text-flame-400" data-contar="4900">0</p>
+                  <p class="text-[10px] uppercase tracking-[.2em] text-blue-200 mt-1">Desde (COP)</p>
+                </div>
+              </div>
+              <div class="mt-6 flex items-center justify-between rounded-2xl bg-whatsapp/10 border border-whatsapp/30 px-5 py-4">
+                <div>
+                  <p class="text-[10px] uppercase tracking-[.2em] text-emerald-200">Respuesta</p>
+                  <p class="font-display font-bold text-white text-sm">Menos de 24 horas</p>
+                </div>
+                <svg class="w-6 h-6 text-whatsapp" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- CATEGORÍAS -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div class="text-center mb-9">
+    <!-- ============ CATEGORÍAS ============ -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-16">
+      <div class="text-center mb-10 reveal">
         <p class="text-flame-400 text-xs font-bold tracking-[.3em] uppercase mb-2">Explora</p>
-        <h2 class="font-display font-extrabold text-white text-2xl sm:text-4xl tracking-tight">¿Qué estás buscando?</h2>
-        <p class="mt-2 text-blue-200 text-sm">Navega por nuestras categorías y encuentra fácilmente lo que necesitas.</p>
+        <h2 class="font-display font-black text-white text-3xl sm:text-5xl tracking-tight">¿Qué estás buscando?</h2>
+        <p class="mt-3 text-blue-200 text-sm sm:text-base">Toca una categoría y te llevo directo a lo que necesitas.</p>
       </div>
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-        <div class="cat-card nav-go" data-vista="catalogo" data-cat="Limpieza">
-          <div class="p-6 sm:p-8 text-center">
-            <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/10 grid place-items-center text-amber-300">
-              <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 0 1 4-4h10a4 4 0 0 1 0 8H7a4 4 0 0 1-4-4zM5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4"/><path d="M9 5V3h6v2"/></svg>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <div class="cat-card nav-go reveal" data-vista="catalogo" data-cat="Limpieza">
+          <div class="p-7 sm:p-8 text-center">
+            <div class="cat-icon">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 0 1 4-4h10a4 4 0 0 1 0 8H7a4 4 0 0 1-4-4zM5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4"/><path d="M9 5V3h6v2"/></svg>
             </div>
-            <h3 class="font-display font-bold text-white text-sm sm:text-base uppercase tracking-wide">Limpieza</h3>
-            <p class="text-blue-200 text-xs mt-1.5">Raspadores y escurridores</p>
+            <h3 class="font-display font-bold text-white text-lg uppercase tracking-wide">Limpieza</h3>
+            <p class="text-blue-200 text-xs mt-1">Raspadores y escurridores</p>
+            <span class="cat-count" data-cat-count="Limpieza">0 productos</span>
           </div>
         </div>
-        <div class="cat-card nav-go" data-vista="catalogo" data-cat="Corte">
-          <div class="p-6 sm:p-8 text-center">
-            <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/10 grid place-items-center text-amber-300">
-              <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 17l11-11M15 5l4 4M8 12l4-4M7 17a3 3 0 1 0 6 0 3 3 0 0 0-6 0zM15 17a3 3 0 1 0 6 0 3 3 0 0 0-6 0z"/></svg>
+        <div class="cat-card nav-go reveal" data-vista="catalogo" data-cat="Corte">
+          <div class="p-7 sm:p-8 text-center">
+            <div class="cat-icon">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 17l11-11M15 5l4 4M8 12l4-4M7 17a3 3 0 1 0 6 0 3 3 0 0 0-6 0zM15 17a3 3 0 1 0 6 0 3 3 0 0 0-6 0z"/></svg>
             </div>
-            <h3 class="font-display font-bold text-white text-sm sm:text-base uppercase tracking-wide">Corte</h3>
-            <p class="text-blue-200 text-xs mt-1.5">Bisturís y cuchillas</p>
+            <h3 class="font-display font-bold text-white text-lg uppercase tracking-wide">Corte</h3>
+            <p class="text-blue-200 text-xs mt-1">Bisturís y cuchillas</p>
+            <span class="cat-count" data-cat-count="Corte">0 productos</span>
           </div>
         </div>
-        <div class="cat-card nav-go" data-vista="catalogo" data-cat="Herramientas Polarizado">
-          <div class="p-6 sm:p-8 text-center">
-            <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/10 grid place-items-center text-amber-300">
-              <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a4.5 4.5 0 0 0-6.1 6.1L3 18l3 3 5.6-5.6a4.5 4.5 0 0 0 6.1-6.1l-3 3-2.1-2.1 3-3zM14.7 6.3 18.3 2.7l2.8 2.8-3.6 3.6M6.6 14.4l-2.4 2.4"/></svg>
+        <div class="cat-card nav-go reveal" data-vista="catalogo" data-cat="Herramientas Polarizado">
+          <div class="p-7 sm:p-8 text-center">
+            <div class="cat-icon">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a4.5 4.5 0 0 0-6.1 6.1L3 18l3 3 5.6-5.6a4.5 4.5 0 0 0 6.1-6.1l-3 3-2.1-2.1 3-3zM14.7 6.3 18.3 2.7l2.8 2.8-3.6 3.6M6.6 14.4l-2.4 2.4"/></svg>
             </div>
-            <h3 class="font-display font-bold text-white text-sm sm:text-base uppercase tracking-wide">Herramientas Polarizado</h3>
-            <p class="text-blue-200 text-xs mt-1.5">Espátulas y más</p>
+            <h3 class="font-display font-bold text-white text-lg uppercase tracking-wide">Herramientas<br class="hidden" /> Polarizado</h3>
+            <p class="text-blue-200 text-xs mt-1">Espátulas y más</p>
+            <span class="cat-count" data-cat-count="Herramientas Polarizado">0 productos</span>
           </div>
         </div>
-        <div class="cat-card nav-go" data-vista="catalogo" data-cat="Kits">
-          <div class="p-6 sm:p-8 text-center">
-            <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/10 grid place-items-center text-amber-300">
-              <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7 12 3 4 7v10l8 4 8-4V7zM12 3v8M4 7l8 4 8-4M12 11v9"/></svg>
+        <div class="cat-card nav-go reveal" data-vista="catalogo" data-cat="Kits">
+          <div class="p-7 sm:p-8 text-center">
+            <div class="cat-icon">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7 12 3 4 7v10l8 4 8-4V7zM12 3v8M4 7l8 4 8-4M12 11v9"/></svg>
             </div>
-            <h3 class="font-display font-bold text-white text-sm sm:text-base uppercase tracking-wide">Kits</h3>
-            <p class="text-blue-200 text-xs mt-1.5">Sets completos</p>
+            <h3 class="font-display font-bold text-white text-lg uppercase tracking-wide">Kits</h3>
+            <p class="text-blue-200 text-xs mt-1">Sets completos</p>
+            <span class="cat-count" data-cat-count="Kits">0 productos</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PRODUCTOS DESTACADOS -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div class="flex flex-wrap items-end justify-between gap-3 mb-7">
+    <!-- ============ DESTACADOS ============ -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-16">
+      <div class="flex flex-wrap items-end justify-between gap-4 mb-9 reveal">
         <div>
-          <p class="text-flame-400 text-xs font-bold tracking-[.3em] uppercase mb-2">Lo más pedido</p>
-          <h2 class="font-display font-extrabold text-white text-2xl sm:text-4xl tracking-tight">Productos Destacados</h2>
+          <p class="text-flame-400 text-xs font-bold tracking-[.3em] uppercase mb-2">Los favoritos</p>
+          <h2 class="font-display font-black text-white text-3xl sm:text-5xl tracking-tight">Productos Destacados</h2>
         </div>
-        <a href="#catalogo" data-vista="catalogo" class="nav-go text-sm font-bold text-flame-400 hover:text-flame-500 uppercase tracking-wider">Ver todos los productos →</a>
+        <a href="#catalogo" data-vista="catalogo" class="nav-go inline-flex items-center gap-2 text-sm font-bold text-flame-400 hover:text-flame-500 uppercase tracking-wider transition-colors">
+          Ver todos <span>→</span>
+        </a>
       </div>
       <div id="destacados" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"></div>
     </section>
 
-    <!-- CTA COTIZAR -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div class="rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-r from-navy-700 to-navy-800 relative">
-        <div class="absolute inset-0 opacity-20" style="background-image:radial-gradient(circle at 20% 30%, #f97316 1.5px, transparent 1.5px); background-size:24px 24px;"></div>
-        <div class="p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-6 relative z-10">
-          <div class="text-center sm:text-left">
-            <h3 class="font-display font-extrabold text-white text-xl sm:text-3xl tracking-tight">¿Necesitas cotizar herramientas?</h3>
-            <p class="mt-2 text-blue-200 text-sm sm:text-base">Te atendemos directo, respondemos rápido y hacemos envíos a toda Colombia.</p>
+    <!-- ============ CTA ============ -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-16">
+      <div class="rounded-3xl overflow-hidden relative reveal">
+        <div class="absolute inset-0 bg-gradient-to-r from-navy-700 via-navy-800 to-navy-900"></div>
+        <div class="absolute inset-0 opacity-25" style="background-image:radial-gradient(circle at 25% 20%, #f97316 1.5px, transparent 1.5px); background-size:26px 26px;"></div>
+        <div class="p-8 sm:p-14 relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div class="text-center lg:text-left max-w-xl">
+            <h3 class="font-display font-black text-white text-2xl sm:text-4xl tracking-tight">¿No encuentras tu herramienta?</h3>
+            <p class="mt-3 text-blue-200 text-sm sm:text-base">Manejamos línea completa en polarizado, detailing y PPF. Escríbenos y te conseguimos la referencia que necesitas.</p>
           </div>
           <a id="wa-cta" href="#" target="_blank" class="btn-flame whitespace-nowrap">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Cotizar
+            Cotizar ahora
           </a>
         </div>
       </div>
@@ -297,17 +444,18 @@
   <div id="vista-catalogo" class="view relative z-10 hidden">
 
     <section class="relative overflow-hidden border-b border-white/10">
+      <div class="hero-glow" style="top:-120px;right:-60px;"></div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 text-center relative z-10">
         <p class="text-flame-400 text-xs font-bold tracking-[.3em] uppercase mb-3">Revista virtual 2026</p>
-        <h1 class="font-display font-extrabold text-white text-4xl sm:text-6xl tracking-tight">Catálogo de <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-flame-500">Herramienta</span></h1>
+        <h1 class="font-display font-black text-white text-4xl sm:text-6xl tracking-tight">Catálogo de <span class="shine-text">Herramienta</span></h1>
         <p class="mt-4 text-blue-200 text-sm sm:text-base max-w-xl mx-auto">Polarizado · Detailing · PPF — toca cualquier producto y pídelo directo por WhatsApp.</p>
       </div>
     </section>
 
     <!-- Filtros + búsqueda -->
-    <div class="sticky top-[62px] sm:top-[68px] z-40 bg-navy-900/90 backdrop-blur-md border-b border-white/10">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3">
-        <div class="flex items-center gap-3">
+    <div class="sticky top-[70px] sm:top-[78px] z-40 bg-navy-950/90 backdrop-blur-md border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5">
+        <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-3">
           <div id="filtros" class="flex gap-2 overflow-x-auto pb-1 flex-1">
             <button class="chip active" data-filter="todos">Todos</button>
             <button class="chip" data-filter="Limpieza">Limpieza</button>
@@ -315,64 +463,78 @@
             <button class="chip" data-filter="Herramientas Polarizado">Herramientas Polarizado</button>
             <button class="chip" data-filter="Kits">Kits</button>
           </div>
-          <div class="hidden sm:block relative">
+          <div class="relative lg:w-72">
             <input id="buscador" type="text" placeholder="Buscar producto o modelo..."
-                   class="w-52 pl-9 pr-3 py-2 text-sm rounded-full border border-white/20 bg-white/10 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-flame-500 focus:border-flame-500" />
-            <svg class="w-4 h-4 text-blue-300 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path stroke-linecap="round" d="m21 21-4.3-4.3"></path></svg>
+                   class="w-full pl-10 pr-4 py-2.5 text-sm rounded-full border border-white/20 bg-white/10 text-white placeholder-blue-200/70 focus:outline-none focus:ring-2 focus:ring-flame-500 focus:border-flame-500" />
+            <svg class="w-4 h-4 text-blue-300 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path stroke-linecap="round" d="m21 21-4.3-4.3"></path></svg>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-      <div class="flex items-center justify-between mb-6">
-        <p id="result-count" class="text-xs text-blue-200 font-semibold uppercase tracking-wider"></p>
-        <a href="#inicio" data-vista="inicio" class="nav-go text-xs font-bold text-blue-200 hover:text-flame-400 uppercase tracking-wider">← Volver al inicio</a>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
+      <div class="flex items-center justify-between mb-7">
+        <p id="result-count" class="text-xs text-blue-200 font-bold uppercase tracking-wider"></p>
+        <a href="#inicio" data-vista="inicio" class="nav-go inline-flex items-center gap-2 text-xs font-bold text-blue-200 hover:text-flame-400 uppercase tracking-wider transition-colors">
+          <span>←</span> Volver al inicio
+        </a>
       </div>
-
-      <!-- Grid de productos (diseño editorial/revista) -->
       <div id="productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"></div>
     </div>
   </div>
 
-  <!-- ================= FOOTER (ambas vistas) ================= -->
-  <footer id="contacto" class="border-t border-white/10 bg-navy-900/80 relative z-10 mt-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <img src="logo.jpg" alt="Supplies Graphics" class="w-10 h-10 rounded-full object-cover border-2 border-flame-500" />
-            <p class="font-display font-extrabold text-white tracking-wide">SUPPLIES <span class="text-flame-500">GRAPHICS</span></p>
+  <!-- ================= FOOTER ================= -->
+  <footer id="contacto" class="border-t border-white/10 bg-navy-950/80 relative z-10 mt-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div class="lg:col-span-2">
+          <div class="flex items-center gap-4 mb-4">
+            <img src="logo.jpg" alt="Supplies Graphics" class="w-16 h-16 rounded-full object-cover border-2 border-flame-500 shadow-glow" />
+            <div>
+              <p class="font-display font-extrabold text-white text-xl tracking-wide">SUPPLIES <span class="text-flame-500">GRAPHICS</span></p>
+              <p class="text-[10px] text-blue-200 tracking-[.28em] uppercase">Polarizado · Detailing · PPF</p>
+            </div>
           </div>
-          <p class="text-sm text-blue-200 leading-relaxed">Herramientas profesionales para polarizados, detailing y PPF. Calidad industrial y atención directa.</p>
+          <p class="text-sm text-blue-200 leading-relaxed max-w-md">Herramientas profesionales de calidad industrial. Atención directa, precios en pesos colombianos y envíos a todo el país.</p>
+          <div class="mt-5 flex gap-3">
+            <span class="inline-flex items-center gap-2 text-xs font-semibold text-emerald-300 bg-white/5 border border-white/10 rounded-full px-3 py-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-whatsapp"></span> Respuesta en menos de 24h
+            </span>
+          </div>
         </div>
         <div>
-          <h4 class="font-bold text-white uppercase tracking-wider text-sm mb-3">Contacto</h4>
-          <p class="text-sm text-blue-200 mb-2">Bogotá, Colombia</p>
-          <a id="wa-footer" href="#" target="_blank" class="text-sm text-flame-400 hover:text-flame-500 font-semibold">WhatsApp: +57 310 878 7928</a>
+          <h4 class="font-display font-bold text-white uppercase tracking-wider text-sm mb-4">Contacto</h4>
+          <p class="text-sm text-blue-200 mb-1">Bogotá, Colombia</p>
+          <a id="wa-footer" href="#" target="_blank" class="text-sm font-bold text-flame-400 hover:text-flame-500 transition-colors">WhatsApp: +57 310 878 7928</a>
         </div>
         <div>
-          <h4 class="font-bold text-white uppercase tracking-wider text-sm mb-3">Catálogo</h4>
-          <div class="flex flex-col gap-1 text-sm text-blue-200">
-            <a href="#catalogo" data-vista="catalogo" class="nav-go hover:text-flame-400">Ver catálogo de herramienta</a>
-            <a href="#catalogo" data-vista="catalogo" data-cat="Limpieza" class="nav-go hover:text-flame-400">Limpieza</a>
-            <a href="#catalogo" data-vista="catalogo" data-cat="Corte" class="nav-go hover:text-flame-400">Corte</a>
-            <a href="#catalogo" data-vista="catalogo" data-cat="Kits" class="nav-go hover:text-flame-400">Kits</a>
+          <h4 class="font-display font-bold text-white uppercase tracking-wider text-sm mb-4">Catálogo</h4>
+          <div class="flex flex-col gap-2 text-sm text-blue-200">
+            <a href="#catalogo" data-vista="catalogo" class="nav-go hover:text-flame-400 transition-colors">Ver catálogo completo</a>
+            <a href="#catalogo" data-vista="catalogo" data-cat="Limpieza" class="nav-go hover:text-flame-400 transition-colors">Limpieza</a>
+            <a href="#catalogo" data-vista="catalogo" data-cat="Corte" class="nav-go hover:text-flame-400 transition-colors">Corte</a>
+            <a href="#catalogo" data-vista="catalogo" data-cat="Herramientas Polarizado" class="nav-go hover:text-flame-400 transition-colors">Herramientas Polarizado</a>
+            <a href="#catalogo" data-vista="catalogo" data-cat="Kits" class="nav-go hover:text-flame-400 transition-colors">Kits</a>
           </div>
         </div>
       </div>
-      <div class="mt-8 pt-6 border-t border-white/10 text-center">
+      <div class="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
         <p class="text-xs text-blue-200/70">© 2026 Supplies Graphics · Bogotá, Colombia</p>
+        <p class="text-xs text-blue-200/50">Hecho con dedicación para tu taller 🔧</p>
       </div>
     </div>
   </footer>
+
+  <!-- Botón flotante WhatsApp -->
+  <a id="wa-float" href="#" target="_blank" class="wa-float" aria-label="Pedir por WhatsApp">
+    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
 
   <!-- ================= DATA + LOGIC ================= -->
   <script>
     // ============================================================
     // 1) DATOS DEL CATÁLOGO  (arreglo JSON sencillo)
     //    ⚠️ Cambia "573108787928" si deseas otro número de WhatsApp
-    //    (código de país 57 + número, sin + ni espacios)
     // ============================================================
     const WHATSAPP_NUMBER = "573108787928";
 
@@ -436,31 +598,32 @@
     const contador = document.getElementById("result-count");
     const buscador = document.getElementById("buscador");
 
-    function crearTarjeta(p) {
+    function crearTarjeta(p, esDestacado) {
       const card = document.createElement("article");
-      card.className = "card flex flex-col relative";
+      card.className = "card flex flex-col relative" + (esDestacado ? " featured" : "");
 
-      const badge = p.destacado
-        ? `<span class="absolute top-3 right-3 z-10 text-[9px] font-bold uppercase tracking-widest px-2 py-1 rounded-full bg-flame-500 text-white shadow-glow">Recomendado</span>`
-        : "";
+      const badgeTop = p.destacado
+        ? `<span class="badge-top">★ Recomendado</span>` : "";
 
       card.innerHTML = `
-        <div class="thumb">
+        <div class="thumb g-${p.categoria.replace(/ /g, "-")}">
           <span class="badge-cat">${p.categoria}</span>
-          ${badge}
+          ${badgeTop}
           <div class="ring"></div>
           ${iconoHerramienta}
-          <span class="absolute bottom-2.5 right-3 z-10 text-[10px] font-bold tracking-widest text-navy-700 uppercase">${p.modelo}</span>
+          <span class="spec-model">REF ${p.modelo}</span>
         </div>
-        <div class="p-5 flex flex-col flex-1">
+        <div class="p-5 sm:p-6 flex flex-col flex-1">
           <h3 class="font-display font-bold text-navy-800 text-base sm:text-lg leading-snug tracking-tight">${p.titulo}</h3>
           <p class="mt-2 text-sm text-slate-500 leading-relaxed flex-1">${p.descripcion}</p>
-          <div class="mt-3 flex items-center gap-2">
-            <span class="text-[11px] font-bold tracking-widest uppercase text-slate-400 border border-slate-200 rounded-md px-2 py-1 bg-slate-50">Modelo ${p.modelo}</span>
+          <div class="mt-4 flex items-baseline justify-between gap-2">
+            <div>
+              <p class="text-2xl font-display font-black text-flame-600 leading-none">${formatearPrecio(p.precio)}</p>
+              <p class="text-[9px] text-slate-400 uppercase tracking-widest mt-1">Precio COP · IVA incl.</p>
+            </div>
+            <span class="text-[10px] font-bold tracking-widest uppercase text-slate-400 border border-slate-200 rounded-md px-2 py-1 bg-slate-50 whitespace-nowrap">${p.modelo}</span>
           </div>
-          <p class="mt-4 text-2xl font-display font-extrabold text-flame-600 leading-none">${formatearPrecio(p.precio)}</p>
-          <p class="text-[10px] text-slate-400 uppercase tracking-widest mt-1 mb-4">Precio COP · IVA incluido</p>
-          <button type="button" class="btn-wa">
+          <button type="button" class="btn-wa mt-4">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
@@ -488,17 +651,25 @@
       });
 
       grid.innerHTML = "";
-      filtradas.forEach((p) => grid.appendChild(crearTarjeta(p)));
+      filtradas.forEach((p, i) => grid.appendChild(crearTarjeta(p, i === 0)));
 
       contador.textContent = filtradas.length === 1
         ? "1 producto"
         : `${filtradas.length} productos`;
+      observarReveal();
     }
 
     function renderDestacados() {
       gridDestacados.innerHTML = "";
       productos.filter((p) => p.destacado).forEach((p) => gridDestacados.appendChild(crearTarjeta(p)));
+      observarReveal();
     }
+
+    // Conteo por categoría
+    document.querySelectorAll("[data-cat-count]").forEach((el) => {
+      const n = productos.filter((p) => p.categoria === el.dataset.catCount).length;
+      el.textContent = `${n} producto${n === 1 ? "" : "s"}`;
+    });
 
     document.querySelectorAll(".chip[data-filter]").forEach((chip) => {
       chip.addEventListener("click", () => {
@@ -515,7 +686,7 @@
     });
 
     // ============================================================
-    // 5) NAVEGACIÓN ENTRE VISTAS (Inicio <-> Catálogo)
+    // 5) NAVEGACIÓN ENTRE VISTAS
     // ============================================================
     const vistaInicio = document.getElementById("vista-inicio");
     const vistaCatalogo = document.getElementById("vista-catalogo");
@@ -574,32 +745,77 @@
       menuMovil.classList.toggle("hidden");
     });
 
-    // Navegación por hash (#inicio / #catalogo)
-    function manejarHash() {
-      const h = location.hash;
-      if (h === "#catalogo") irACatalogo();
-      else irAInicio();
+    // ============================================================
+    // 6) SIEMPRE ABRIR EN EL INICIO
+    // ============================================================
+    if (location.hash) {
+      history.replaceState(null, "", location.pathname + location.search);
     }
-    window.addEventListener("hashchange", manejarHash);
+    irAInicio();
 
     // ============================================================
-    // 6) BOTONES GENERALES DE WHATSAPP
+    // 7) BOTONES GENERALES DE WHATSAPP
     // ============================================================
     const mensajeGeneral = encodeURIComponent(
       "Hola Supplies Graphics 👋\n\nQuiero información sobre sus herramientas profesionales para polarizado, detailing y PPF."
     );
     const urlWa = `https://wa.me/${WHATSAPP_NUMBER}?text=${mensajeGeneral}`;
-    ["wa-header", "wa-header-movil", "wa-hero", "wa-cta", "wa-footer"].forEach((id) => {
+    ["wa-header", "wa-header-movil", "wa-hero", "wa-cta", "wa-footer", "wa-float"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) el.href = urlWa;
     });
 
     // ============================================================
-    // 7) INICIO
+    // 8) SCROLL REVEAL
+    // ============================================================
+    let observer;
+    function observarReveal() {
+      if (observer) observer.disconnect();
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("visible");
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".reveal:not(.visible), .card").forEach((el) => observer.observe(el));
+    }
+
+    // ============================================================
+    // 9) BARRA DE PROGRESO + CONTADORES + HEADER
+    // ============================================================
+    const barra = document.getElementById("scroll-progress");
+    const header = document.getElementById("header");
+    window.addEventListener("scroll", () => {
+      const h = document.documentElement;
+      const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+      barra.style.width = pct + "%";
+      if (h.scrollTop > 30) header.classList.add("!bg-navy-950/95");
+    });
+
+    function animarContadores() {
+      document.querySelectorAll("[data-contar]").forEach((el) => {
+        const meta = parseInt(el.dataset.contar, 10);
+        const inicio = performance.now();
+        const dur = 1100;
+        function paso(t) {
+          const p = Math.min((t - inicio) / dur, 1);
+          const val = Math.round(meta * (1 - Math.pow(1 - p, 3)));
+          el.textContent = new Intl.NumberFormat("es-CO").format(val);
+          if (p < 1) requestAnimationFrame(paso);
+        }
+        requestAnimationFrame(paso);
+      });
+    }
+
+    // ============================================================
+    // 10) INICIO
     // ============================================================
     renderizar();
     renderDestacados();
-    manejarHash();
+    observarReveal();
+    animarContadores();
   </script>
 </body>
 </html>
