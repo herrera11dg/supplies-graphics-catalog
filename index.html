@@ -946,26 +946,25 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    document.querySelectorAll(".nav-go").forEach((el) => {
-      el.addEventListener("click", (e) => {
-        e.preventDefault();
-        menuMovil.classList.add("hidden");
-        const vista = el.dataset.vista;
-        const cat = el.dataset.cat;
-        if (vista === "catalogo") irACatalogo(cat);
-        else if (vista === "inicio") irAInicio();
-        else if (vista === "privacidad") irAPagina("vista-privacidad");
-        else if (vista === "terminos") irAPagina("vista-terminos");
-        else if (vista === "cookies") irAPagina("vista-cookies");
-      });
+    document.addEventListener("click", (e) => {
+      const nav = e.target.closest(".nav-go");
+      if (!nav) return;
+      e.preventDefault();
+      menuMovil.classList.add("hidden");
+      const vista = nav.dataset.vista;
+      const cat = nav.dataset.cat;
+      if (vista === "catalogo") irACatalogo(cat);
+      else if (vista === "inicio") irAInicio();
+      else if (vista === "privacidad") irAPagina("vista-privacidad");
+      else if (vista === "terminos") irAPagina("vista-terminos");
+      else if (vista === "cookies") irAPagina("vista-cookies");
     });
 
-    document.querySelectorAll(".nav-contacto").forEach((el) => {
-      el.addEventListener("click", (e) => {
-        e.preventDefault();
-        menuMovil.classList.add("hidden");
-        irContacto();
-      });
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".nav-contacto")) return;
+      e.preventDefault();
+      menuMovil.classList.add("hidden");
+      irContacto();
     });
 
     const btnMenu = document.getElementById("btn-menu");
