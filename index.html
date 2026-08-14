@@ -327,6 +327,21 @@
       background: linear-gradient(135deg, #0d2550 0%, #1a428a 55%, #2563eb 100%);
     }
     .modal-media img { width: 100%; height: 100%; max-height: 340px; object-fit: contain; }
+    .modal-media { position: relative; }
+    .modal-thumbs {
+      position: absolute; bottom: .9rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: .55rem; padding: .4rem; border-radius: 9999px;
+      background: rgba(5,15,38,.6); backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    .modal-thumb {
+      width: 3.1rem; height: 3.1rem; border-radius: .6rem; overflow: hidden;
+      border: 2px solid rgba(255,255,255,.25); cursor: pointer; padding: 0;
+      background: #fff; transition: border-color .2s, transform .2s;
+    }
+    .modal-thumb img { width: 100%; height: 100%; object-fit: cover; max-height: none; }
+    .modal-thumb:hover { transform: translateY(-2px); border-color: #fff; }
+    .modal-thumb.activo { border-color: #f97316; box-shadow: 0 0 0 2px rgba(249,115,22,.45); }
     .modal-body ul { display: grid; gap: .55rem; }
     .modal-body li {
       position: relative; padding-left: 1.35rem; font-size: .92rem; color: #334155; line-height: 1.55;
@@ -734,7 +749,7 @@
     const WHATSAPP_NUMBER = "573108787928";
 
         const productos = [
-      { id: 1, titulo: "C\u00daTER DE PRECISI\u00d3N OLFA 180", descripcion: "C\u00fater de precisi\u00f3n con hoja desprendible, ideal para cortes finos y exactos en pel\u00edcula y materiales delicados.", marca: "OLFA", modelo: "OLFA 180 5001", precio: 0, categoria: "Corte", img: "imagenes/productos/01-cutier-precision-olfa-180-5001.jpeg", destacado: true, detalle: ["C\u00fater de precisi\u00f3n de la marca OLFA, de dise\u00f1o fino y manejable.", "Perfecto para corte de tejido, cartulina y pelado de vinilos de corte.", "Construcci\u00f3n total en metal y alojamiento de la cuchilla de acero de principio a fin.", "Incluye clip para bolsillo.", "Robusto: soporta mucha fuerza y no se rompe f\u00e1cilmente.", "Incluye cuchilla Silver Snap de OLFA.", "Resistente a productos qu\u00edmicos y disolventes.", "Usa hojas de repuesto de 9mm."] },
+      { id: 1, titulo: "C\u00daTER DE PRECISI\u00d3N OLFA 180", descripcion: "C\u00fater de precisi\u00f3n con hoja desprendible, ideal para cortes finos y exactos en pel\u00edcula y materiales delicados.", marca: "OLFA", modelo: "OLFA 180 5001", precio: 0, categoria: "Corte", imgs: ["imagenes/productos/01-cutier-precision-olfa-180-5001.webp", "imagenes/productos/01-cutier-precision-olfa-180-5001-2.png"], img: "imagenes/productos/01-cutier-precision-olfa-180-5001.webp", destacado: true, detalle: ["C\u00fater de precisi\u00f3n de la marca OLFA, de dise\u00f1o fino y manejable.", "Perfecto para corte de tejido, cartulina y pelado de vinilos de corte.", "Construcci\u00f3n total en metal y alojamiento de la cuchilla de acero de principio a fin.", "Incluye clip para bolsillo.", "Robusto: soporta mucha fuerza y no se rompe f\u00e1cilmente.", "Incluye cuchilla Silver Snap de OLFA.", "Resistente a productos qu\u00edmicos y disolventes.", "Usa hojas de repuesto de 9mm."] },
       { id: 2, titulo: "CINTA DE HOJA DE ALUMINIO 3M", descripcion: "Cinta de aluminio de alta adherencia para sellado y protecci\u00f3n de superficies en instalaciones.", marca: "3M", modelo: "VentureTape 1520CW", precio: 0, categoria: "Herramientas Polarizado", img: "imagenes/productos/02-cinta-hoja-aluminio-3m-1520cw.jpeg", destacado: false, detalle: ["Cinta de hoja de aluminio de alta adherencia.", "Ideal para sellado de juntas y reparaciones en instalaciones.", "Soporte de aluminio resistente al calor y a la humedad.", "Adhesivo de larga duraci\u00f3n.", "Marca 3M, calidad industrial."] },
       { id: 3, titulo: "SELLADOR CER\u00c1MICO EN SPRAY", descripcion: "Sellador cer\u00e1mico de mantenimiento para recargar la protecci\u00f3n hidrof\u00f3bica y el brillo de las superficies.", marca: "Geoshield", modelo: "Ceramic Boost", precio: 0, categoria: "Limpieza", img: "imagenes/productos/03-sellador-ceramico-spray-geoshield.jpeg", destacado: false, detalle: ["Sellador cer\u00e1mico en spray para mantenimiento.", "Recarga la protecci\u00f3n hidrof\u00f3bica y el brillo de la superficie.", "Aplicaci\u00f3n r\u00e1pida: rociar y limpiar.", "Uso recomendado como mantenimiento peri\u00f3dico tras el lavado.", "Presentaci\u00f3n en spray."] },
       { id: 4, titulo: "MINI RASPADORES DE PL\u00c1STICO", descripcion: "Mini raspadores de pl\u00e1stico para trabajos de detalle, limpieza y pulido en espacios reducidos.", marca: "American Line", modelo: "66-0442", precio: 0, categoria: "Limpieza", img: "imagenes/productos/04-mini-raspadores-plastico-american-line.jpeg", destacado: false, detalle: ["Mini raspadores de pl\u00e1stico para trabajos de detalle.", "Limpieza y pulido en espacios reducidos.", "Pl\u00e1stico resistente que no raya las superficies.", "Set m\u00faltiple para distintas tareas."] },
@@ -852,7 +867,7 @@
         <div class="thumb g-${p.categoria.replace(/ /g, "-")}">
           <span class="badge-cat">${p.categoria}</span>
           ${badgeTop}
-          ${p.img ? `<img class="prod-img" src="${p.img}" alt="${p.titulo}" loading="lazy" />` : `<div class="ring"></div>${iconoPorCategoria(p.categoria)}`}
+          ${p.img || (p.imgs && p.imgs[0]) ? `<img class="prod-img" src="${p.img || p.imgs[0]}" alt="${p.titulo}" loading="lazy" />` : `<div class="ring"></div>${iconoPorCategoria(p.categoria)}`}
           <span class="spec-model">REF ${p.modelo}</span>
         </div>
         <div class="p-5 sm:p-6 flex flex-col flex-1">
@@ -914,11 +929,16 @@
     function abrirDetalle(p) {
       const bullets = (p.detalle || []).map((b) => `<li>${b}</li>`).join("");
       const marcaRef = p.marca ? `${p.marca} · ${p.modelo}` : p.modelo;
+      const imgs = (p.imgs && p.imgs.length) ? p.imgs : (p.img ? [p.img] : []);
+      const thumbs = imgs.length > 1
+        ? `<div class="modal-thumbs">${imgs.map((src, i) => `<button type="button" class="modal-thumb${i === 0 ? " activo" : ""}" data-pos="${i}" aria-label="Foto ${i + 1}"><img src="${src}" alt="${p.titulo} — foto ${i + 1}" /></button>`).join("")}</div>`
+        : "";
       modalContenido.innerHTML = `
         <button class="modal-cerrar" id="modal-cerrar" aria-label="Cerrar">×</button>
         <div class="grid sm:grid-cols-2">
           <div class="modal-media g-${p.categoria.replace(/ /g, "-")}">
-            <img src="${p.img}" alt="${p.titulo}" />
+            <img id="modal-img-principal" src="${imgs[0]}" alt="${p.titulo}" />
+            ${thumbs}
           </div>
           <div class="modal-body p-6 sm:p-8">
             <span class="inline-block text-[10px] font-bold tracking-widest uppercase bg-navy-800 text-amber-300 rounded-full px-3 py-1">${p.categoria}</span>
@@ -948,6 +968,16 @@
       document.getElementById("modal-cerrar").addEventListener("click", cerrarDetalle);
       const btnWa = document.getElementById("btn-wa-modal");
       if (btnWa) btnWa.addEventListener("click", () => abrirWhatsApp(p.titulo, p.modelo, null));
+      const imgPrincipal = document.getElementById("modal-img-principal");
+      modalContenido.querySelectorAll(".modal-thumb").forEach((th) => {
+        th.addEventListener("click", () => {
+          imgPrincipal.src = imgs[+th.dataset.pos];
+          modalContenido.querySelectorAll(".modal-thumb").forEach((t) => {
+            t.classList.toggle("activo", t === th);
+            t.setAttribute("aria-pressed", t === th ? "true" : "false");
+          });
+        });
+      });
     }
 
     function cerrarDetalle() {
